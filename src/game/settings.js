@@ -14,7 +14,7 @@ export class GameSettings {
   }
 
   clone() {
-    return JSON.parse(JSON.stringify(this));
+    return JSON.parse(JSON.stringify(this)); // TODO: extract dependency to JSON?
   }
 
   static beginner() {

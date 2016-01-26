@@ -1,49 +1,74 @@
 import {inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
-import {Storage} from './utility/storage';
+import {RemoteHighscoreStorage} from './storage/remoteHighscoreStorage';
+import {LocalHighscoreStorage} from './storage/localHighscoreStorage';
 import {GameState} from './game/minesweeper';
-import {GameSettingsType} from './game/settings';
+import {GameSettings, GameSettingsType} from './game/settings';
 import {GameStateChangedEvent} from './events';
 
-@inject(EventAggregator, Storage)
+// TODO: determine storage availability at DI container setup stage.
+@inject(EventAggregator, RemoteHighscoreStorage, LocalHighscoreStorage)
 export class Highscores {
-  _settingsTypeKeyMap = {};
-
-  categories = ['expert', 'intermediate', 'beginner'];
+  categories = [ GameSettings.expert(), GameSettings.intermediate(), GameSettings.beginner() ];
   scores = {};
+  activeSubmission = null;
 
-  constructor(eventAggregator, storage) {
-    this._storage = storage;
+  constructor(eventAggregator, remoteHighscoreStorage, localHighscoreStorage) {
+    for (let category of this.categories)
+        this.scores[category.type] = [];
 
-    this._settingsTypeKeyMap[GameSettingsType.Expert] = this.categories[0];
-    this._settingsTypeKeyMap[GameSettingsType.Intermediate] = this.categories[1];
-    this._settingsTypeKeyMap[GameSettingsType.Beginner] = this.categories[2];
+    remoteHighscoreStorage.isAvailable().then(
+      () => {
+        console.log("REMOTE AVAILABLE");
+        this._storage = remoteHighscoreStorage;
+        this.getScores();
+      },
+      () => {
+        console.log("REMOTE NOT AVAILABLE");
+        console.log("FALLBACK TO LOCAL");
+        console.log(localHighscoreStorage);
+        this._storage = localHighscoreStorage;
+        this.isUsingLocalStorage = true;
+        this.getScores();
+      });
 
-    for (let key of this.categories) {
-      this.scores[key] = this._storage.get(key);
-      if (!this.scores[key])
-        this.scores[key] = [];
-    }
-
-    this._addDummyHighscores();
+    // TEMP
+    // this._addDummyHighscores();
+    this.activeSubmission = { time: 15, settings: GameSettings.beginner() };
 
     eventAggregator.subscribe(GameStateChangedEvent, this._gameStateChanged.bind(this));
   }
 
+  getScores() {
+    this._storage.get().then(highscores => {
+      if (highscores)
+        this.scores = highscores;
+    });
+  }
+
+  submit(submission) {
+    this._storage.add(submission).then(() => {
+      this.getScores();
+    });
+  }
+
   _gameStateChanged(evt) {
     if (evt.currentState === GameState.Won) {
-      let key = this._settingsTypeKeyMap[evt.minesweeper.settings.type];
-      if (key) {
-        let catScores = this.scores[key];
-        catScores.push({ name: 'Igor', time: evt.minesweeper.gameTime, countryCode: 'ee' });
-        this._storage.set(key, catScores);
-      }
+      let submission = {
+        time: evt.minesweeper.gameTime,
+        settings: evt.minesweeper.settings
+      };
+      if (this._isSubmissionAvailable(submission))
+        this.activeSubmission = submission;
     }
+  }
+
+  _isSubmissionAvailable(submission) {
+    return true;
   }
 
   _addDummyHighscores() {
     for (let key of this.categories) {
-      // let catScores = this.scores[key];
       let catScores = [];
       for (let i = 0; i < 10; i++)
         catScores.push({ name: 'Igor', time: 151, countryCode: 'ee' });

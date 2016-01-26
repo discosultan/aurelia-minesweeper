@@ -2,25 +2,36 @@
   <require from="./utility/sort"></require>
   <require from="./utility/take"></require>
 
-  <div class="row medium-unstack">
-    <div class="columns highscores highscores-border" repeat.for="category of categories">
-      <h4 class="capitalize highscores-header">${category}</h4>
+  <!-- Highscore submission -->
+  <div class="row" if.bind="activeSubmission">
+    <div class="columns align-middle highscores__submission highscores__border">
+      <h4 class="highscores__info"><span class="highscores__header">Congratulations!</span> You beat #aurelia-minesweeper in ${activeSubmission.time} seconds on ${activeSubmission.settings.name} mode!</h4>
+      <input type="text" placeholder="Enter name" required />
+      <input type="submit" value="Submit" />
+    </div>
+  </div>
 
-      <div class="row" repeat.for="entry of scores[category] | sort:'time':'ascending' | take:10">
+  <!-- Highscore categories -->
+  <div class="row medium-unstack">
+    <div class="columns highscores__category highscores__border" repeat.for="category of categories">
+      <h4 class="highscores__header">${category.name}</h4>
+
+      <div class="row highscores__text" repeat.for="entry of scores[category.type] | sort:'time':'ascending' | take:10">
         <div class="columns small-2">${$index + 1}.</div>
         <div class="columns small-6">
           ${entry.name}
-          <img class="user-flag highscores-border" if.bind="entry.countryCode" src="img/flag/${entry.countryCode}.png" />
+          <img class="highscores__flag highscores__border" if.bind="entry.country" src="img/flag/${entry.country}.png" />
         </div>
         <div class="columns small-4 text-right">${entry.time}</div>
       </div>
-      <div class="row" if.bind="scores[category].length === 0">
-        <div class="columns">Nothing to show here.</div>
+      <div class="row" if.bind="scores[category.type].length === 0">
+        <div class="columns highscores__text">Nothing to show here.</div>
       </div>
     </div>
   </div>
 
-  <div class="row">
+  <!-- Misc info -->
+  <div class="row" if.bind="isUsingLocalStorage">
     <h5 class="columns">Highscores are stored in local storage!</h5>
   </div>
 </template>

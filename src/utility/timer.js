@@ -8,7 +8,7 @@ export class Timer {
   start() {
     if (this._windowIntervalHandle)
       this.stop();
-    this._windowIntervalHandle = window.setInterval(this.action, this.interval);
+    this._windowIntervalHandle = window.setInterval(this.action, this.interval); // TODO: extract dependency to window?
   }
 
   stop() {
