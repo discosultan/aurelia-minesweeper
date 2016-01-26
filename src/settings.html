@@ -1,0 +1,35 @@
+<template>
+  <div class="au-animate">
+    <div class="row">
+      <div class="small-6 columns">
+      </div>
+      <div class="small-2 columns">
+        <h4 class="inline">Width</h4>
+      </div>
+      <div class="small-2 columns">
+        <h4 class="inline">Height</h4>
+      </div>
+      <div class="small-2 columns">
+        <h4 class="inline">Mines</h4>
+      </div>
+    </div>
+    <div class="row" repeat.for="entry of allSettings">
+      <div class="small-6 columns">
+        <input id="diff-${entry.type}" type="radio" name="diff" model.bind="entry" checked.bind="settings" matcher.bind="settingsComparer" />
+        <label for="diff-${entry.type}"><h4 class="inline">&nbsp;${entry.name}</h4></label>
+      </div>
+      <div class="small-2 columns">
+        <span if.bind="entry.type !== GameSettingsType.Custom">${entry.width}</span>
+        <input class="settings__input" if.bind="entry.type === GameSettingsType.Custom" value.bind="entry.width" type="number" min="1" step="1"/ />
+      </div>
+      <div class="small-2 columns">
+        <span if.bind="entry.type !== GameSettingsType.Custom">${entry.height}</span>
+        <input class="settings__input" if.bind="entry.type === GameSettingsType.Custom" value.bind="entry.height" type="number" min="1" step="1"/ />
+      </div>
+      <div class="small-2 columns">
+        <span if.bind="entry.type !== GameSettingsType.Custom">${entry.numMines}</span>
+        <input class="settings__input" if.bind="entry.type === GameSettingsType.Custom" value.bind="entry.numMines" type="number" min="0" step="1"/ />
+      </div>
+    </div>
+  </div>
+</template>

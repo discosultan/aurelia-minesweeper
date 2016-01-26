@@ -1,0 +1,43 @@
+<template class="minesweeper">
+  <require from="./module.css"></require>
+
+  <!-- Minefield labels -->
+  <div class="row board__header">
+    <div class="small-4 columns minefield-label no-padding no-wrap">
+      <img class="minefield-label-icon" src="img/mine.png" alt="mines">
+      ${minesweeper.settings.numMines - minesweeper.numFlagged}
+    </div>
+    <div class="columns">
+      <div class="minefield-label ${isSmileyPressed ? 'open' : 'closed'}"
+           mousedown.delegate="onSmileyMouseDown($event)"
+           mouseup.delegate="onSmileyMouseUp($event)"
+           mouseout.delegate="onSmileyMouseOut($event)">
+        <div class="smiley smiley-happy" if.bind="(minesweeper.state === GameState.ReadyToPlay || minesweeper.state === GameState.Playing) && !isPressValid"></div>
+        <div class="smiley smiley-scared" if.bind="(minesweeper.state === GameState.ReadyToPlay || minesweeper.state === GameState.Playing) && isPressValid"></div>
+        <div class="smiley smiley-cool" if.bind="minesweeper.state === GameState.Won"></div>
+        <div class="smiley smiley-dead" if.bind="minesweeper.state === GameState.Lost"></div>
+      </div>
+    </div>
+    <div class="small-4 columns minefield-label no-padding no-wrap">
+      <img class="minefield-label-icon" src="img/timer.png" alt="timer">
+      ${minesweeper.gameTime}
+    </div>
+  </div>
+
+  <!-- Minefield -->
+  <div class="minefield">
+    <div repeat.for="row of minesweeper.squares" class="no-wrap">
+      <div repeat.for="square of row"
+           class="square color-${square.numAdjacentMines} ${(square.state === SquareState.Open || square.state === SquareState.Pressed) ? 'open' : 'closed'} ${square.causedGameOver ? 'game-over' : ''}"
+           mousedown.delegate="onSquareMouseDown(square, $event)"
+           mouseup.delegate="onSquareMouseUp(square, $event)"
+           mouseover.delegate="onSquareMouseOver(square, $event)"
+           mouseout.delegate="onSquareMouseOut(square, $event)"
+           contextmenu.delegate="onSquareContextMenu(square, $event)">
+        <img if.bind="square.state === SquareState.Open && square.numAdjacentMines < 0" src="img/mine.png" alt="mine" />
+        <img if.bind="square.state === SquareState.Flagged" src="img/flag.png" alt="flag" />
+        <span if.bind="square.state === SquareState.Open && square.numAdjacentMines > 0">${square.numAdjacentMines}</span>
+      </div>
+    </div>
+  </div>
+</template>

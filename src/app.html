@@ -1,0 +1,36 @@
+<template>
+  <require from="./foundation.css"></require>
+  <require from="./base.css"></require>
+  <require from="./settings"></require>
+  <require from="./minesweeper-board"></require>
+  <require from="./highscores"></require>
+
+  <header class="section-header">
+    <div class="row">
+      <div class="small-10 columns align-middle">
+        <img class="brand" src="img/logo.png" alt="Aurelia">
+        <div class="github-badge hide-for-small-only">
+          <iframe src="https://ghbtns.com/github-btn.html?user=discosultan&repo=aurelia-minesweeper&type=star&count=none"
+                  frameborder="0" scrolling="0" width="50px" height="24px"></iframe>
+        </div>
+      </div>
+      <div class="small-2 columns align-middle">
+        <a href="javascript:void(0)" click.delegate="settingsOpen = !settingsOpen">
+          <img class="float-right" src="img/settings.png" width="42px" height="42px" />
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <section class="section-settings ${settingsOpen ? '' : 'slider--closed'}">
+    <settings settings.two-way="settings" />
+  </section>
+
+  <section class="section-middle">
+    <minesweeper class="centered-content" settings.bind="settings"></minesweeper>
+  </section>
+
+  <section class="section-footer">
+    <highscores />
+  </section>
+</template>

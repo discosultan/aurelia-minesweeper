@@ -1,0 +1,26 @@
+<template>
+  <require from="./utility/sort"></require>
+  <require from="./utility/take"></require>
+
+  <div class="row medium-unstack">
+    <div class="columns highscores highscores-border" repeat.for="category of categories">
+      <h4 class="capitalize highscores-header">${category}</h4>
+
+      <div class="row" repeat.for="entry of scores[category] | sort:'time':'ascending' | take:10">
+        <div class="columns small-2">${$index + 1}.</div>
+        <div class="columns small-6">
+          ${entry.name}
+          <img class="user-flag highscores-border" if.bind="entry.countryCode" src="img/flag/${entry.countryCode}.png" />
+        </div>
+        <div class="columns small-4 text-right">${entry.time}</div>
+      </div>
+      <div class="row" if.bind="scores[category].length === 0">
+        <div class="columns">Nothing to show here.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <h5 class="columns">Highscores are stored in local storage!</h5>
+  </div>
+</template>

@@ -1,0 +1,121 @@
+/* Base elements */
+
+body {
+  background-color: #F7F7F7;
+  color: #777777;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  /*margin: 0;*/
+  color: #444444;
+}
+
+/* Layout */
+
+.section-header {
+  height: 80px;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 2px 4px rgba(0,0,0,.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #FFFFFF;
+  position: relative;
+}
+
+.section-settings {
+  /*height: 64px;*/
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 2px 4px rgba(0,0,0,.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+  position: relative;
+  padding: 10px 0;
+}
+
+/* CSS3-Animations */
+@-webkit-keyframes fadeIn {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes fadeIn {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@-webkit-keyframes fadeOut {
+    0%   { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes fadeOut {
+    0%   { opacity: 1; }
+    100% { opacity: 0; }
+}
+.section-settings > div.au-enter {
+  opacity: 0 !important;
+}
+.section-settings > div.au-enter-active {
+  -webkit-animation: fadeIn 2s;
+  animation: fadeIn 2s;
+}
+.section-settings > div.au-leave-active {
+    -webkit-animation: fadeOut 2s;
+    animation: fadeOut 2s;
+}
+
+
+.slider {
+	overflow-y: hidden;
+	max-height: 64px; /* approximate max height */
+
+	/*transition-property: all;
+	transition-duration: .5s;
+	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);*/
+}
+
+.slider--closed {
+	/*max-height: 0;*/
+  display: none;
+}
+
+.section-middle {
+  margin: 0 auto;
+  text-align: center;
+
+  /*margin: 0;
+  padding: 0;*/
+  /*margin-top: -7px;*/
+  background-image: -webkit-gradient(linear, top, from(#6E4D9B), to(#E82887));
+  background-image: -webkit-linear-gradient(top, #6E4D9B, #E82887);
+  background-image: -moz-linear-gradient(top, #6E4D9B, #E82887);
+  background-image: linear-gradient(to top, #6E4D9B, #E82887);
+}
+
+.section-footer {
+  color: #444444;
+}
+
+/* Utilities */
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.no-wrap {
+  white-space: nowrap;
+}
+
+.centered-content {
+  display: inline-block;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.inline {
+  display: inline;
+}
