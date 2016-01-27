@@ -1,0 +1,48 @@
+<template>
+  <require from="../utility/sort"></require>
+  <require from="../utility/take"></require>
+  <require from="./highscores.css"></require>
+
+  <!-- Highscore submission -->
+  <div class="row" if.bind="activeSubmission">
+    <div class="columns align-middle highscores__submission highscores__border">
+      <h4 class="highscores__emphasized">
+        <span class="highscores__header">Congratulations!</span>
+        <span class="weight-normal">You beat</span>
+        #aurelia-minesweeper
+        <span class="weight-normal">in</span>
+        ${activeSubmission.time} seconds
+        <span class="weight-normal">on</span>
+        ${activeSubmission.settings.name} mode<span class="weight-normal">!</span>
+      </h4>
+      <span if.bind="activeSubmission.isHighscore">
+        <input class="submission__name ${activeSubmission.isInvalid ? 'submission__name--invalid' : ''}" type="text" placeholder="Enter name" value.bind="activeSubmission.name" required />
+        <button class="submission__button" click.delegate="submit(activeSubmission)">Submit</button>
+      </span>
+    </div>
+  </div>
+
+  <!-- Highscore categories -->
+  <div class="row medium-unstack">
+    <div class="columns highscores__category highscores__border" repeat.for="category of categories">
+      <h4 class="highscores__header">${category.name}</h4>
+
+      <div class="row" repeat.for="entry of scores[category.type] | sort:'time':'ascending' | take:10">
+        <div class="columns small-2">${$index + 1}.</div>
+        <div class="columns small-6">
+          ${entry.name}
+          <img class="submission__flag highscores__border" if.bind="entry.country" src="img/flag/${entry.country}.png" />
+        </div>
+        <div class="columns small-4 text-right">${entry.time}</div>
+      </div>
+      <div class="row" if.bind="scores[category.type].length === 0">
+        <div class="columns">Nothing to show here.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Misc info -->
+  <div class="row" if.bind="isUsingLocalStorage">
+    <h5 class="columns">Highscores are stored in local storage!</h5>
+  </div>
+</template>

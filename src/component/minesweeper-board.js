@@ -1,8 +1,8 @@
 import {bindable, inject, customElement} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
-import {Minesweeper, GameState} from './game/minesweeper';
-import {SquareState} from './game/square';
-import {GameStateChangedEvent} from './events';
+import {Minesweeper, GameState} from '../game/minesweeper';
+import {SquareState} from '../game/square';
+import {GameStateChangedEvent} from '../events';
 
 @inject(EventAggregator)
 @customElement('minesweeper')
@@ -26,7 +26,7 @@ export class MinesweeperElement {
 
   restart() {
     if (this.settings && this.settings.isValid())
-      this.minesweeper = new Minesweeper(this.settings);    
+      this.minesweeper = new Minesweeper(this.settings);
   }
 
   onSmileyMouseDown(evt) {

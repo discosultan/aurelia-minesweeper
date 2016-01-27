@@ -1,10 +1,12 @@
 <template>
   <require from="./foundation.css"></require>
   <require from="./base.css"></require>
-  <require from="./settings"></require>
-  <require from="./minesweeper-board"></require>
-  <require from="./highscores"></require>
+  <require from="./app.css"></require>
+  <require from="./component/settings"></require>
+  <require from="./component/minesweeper-board"></require>
+  <require from="./component/highscores"></require>
 
+  <!-- Brand and settings button -->
   <header class="section-header">
     <div class="row">
       <div class="small-10 columns align-middle">
@@ -22,14 +24,17 @@
     </div>
   </header>
 
+  <!-- Minesweeper settings -->
   <section class="section-settings ${settingsOpen ? '' : 'slider--closed'}">
     <settings settings.two-way="settings" />
   </section>
 
+  <!-- Minesweeper game -->
   <section class="section-middle">
-    <minesweeper class="centered-content" settings.bind="settings"></minesweeper>
+    <minesweeper class="inline-block" settings.bind="settings"></minesweeper>
   </section>
 
+  <!-- Minesweeper leaderboard -->
   <section class="section-footer">
     <highscores />
   </section>

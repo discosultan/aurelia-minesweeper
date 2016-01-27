@@ -1,5 +1,5 @@
 import {bindable, inject, customElement} from 'aurelia-framework';
-import {GameSettings, GameSettingsType} from './game/settings';
+import {GameSettings, GameSettingsType} from '../game/settings';
 
 export class Settings {
   @bindable settings = null;
@@ -13,6 +13,6 @@ export class Settings {
       GameSettings.intermediate(),
       GameSettings.expert(),
       GameSettings.custom()
-    ];    
+    ];
   }
 }

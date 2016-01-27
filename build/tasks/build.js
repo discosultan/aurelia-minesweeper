@@ -33,7 +33,7 @@ gulp.task('build-html', function() {
 
 // copies changed css files to the output directory
 gulp.task('build-css', function() {
-  return gulp.src(paths.style)
+  return gulp.src([paths.style, paths.css])
     .pipe(changed(paths.output, {extension: '.css'}))
     .pipe(gulp.dest(paths.output))
     .pipe(browserSync.stream());

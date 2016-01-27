@@ -1,10 +1,10 @@
 import {inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
-import {RemoteHighscoreStorage} from './storage/remoteHighscoreStorage';
-import {LocalHighscoreStorage} from './storage/localHighscoreStorage';
-import {GameState} from './game/minesweeper';
-import {GameSettings, GameSettingsType} from './game/settings';
-import {GameStateChangedEvent} from './events';
+import {RemoteHighscoreStorage} from '../storage/remoteHighscoreStorage';
+import {LocalHighscoreStorage} from '../storage/localHighscoreStorage';
+import {GameState} from '../game/minesweeper';
+import {GameSettings, GameSettingsType} from '../game/settings';
+import {GameStateChangedEvent} from '../events';
 
 // TODO: determine storage availability at DI container setup stage.
 @inject(EventAggregator, RemoteHighscoreStorage, LocalHighscoreStorage)
@@ -34,7 +34,7 @@ export class Highscores {
 
     // TEMP
     // this._addDummyHighscores();
-    this.activeSubmission = { time: 15, settings: GameSettings.beginner() };
+    this.activeSubmission = { time: 15, settings: GameSettings.beginner(), isHighscore: true };
 
     eventAggregator.subscribe(GameStateChangedEvent, this._gameStateChanged.bind(this));
   }
@@ -47,23 +47,29 @@ export class Highscores {
   }
 
   submit(submission) {
-    this._storage.add(submission).then(() => {
-      this.getScores();
-    });
+    if (submission.name && !submission.name.match(/^\s+$/)) {
+      console.log("SUBMIT");
+      console.log(submission);
+      // this._storage.add(submission).then(() => {
+      //   this.getScores();
+      //   this.activeSubmission = null;
+      // });
+    } else {
+      submission.isInvalid = true;
+    }
   }
 
   _gameStateChanged(evt) {
     if (evt.currentState === GameState.Won) {
       let submission = {
         time: evt.minesweeper.gameTime,
-        settings: evt.minesweeper.settings
+        settings: evt.minesweeper.settings,
       };
-      if (this._isSubmissionAvailable(submission))
-        this.activeSubmission = submission;
+      submission.isHighscore = this._isHighscoreSubmission(submission);
     }
   }
 
-  _isSubmissionAvailable(submission) {
+  _isHighscoreSubmission(submission) {
     return true;
   }
 
