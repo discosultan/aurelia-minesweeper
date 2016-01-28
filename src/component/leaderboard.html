@@ -2,13 +2,14 @@
   <require from="../utility/sort"></require>
   <require from="../utility/take"></require>
   <require from="./leaderboard.css"></require>
+  <require from="./tweet"></require>
 
   <!-- Highscore submission -->
   <div class="row" if.bind="activeSubmission">
     <div class="columns align-middle highscores__submission highscores__border">
       <div class="row">
         <div class="small-11 columns">
-          <h4 class="highscores__emphasized">
+          <h4 class="highscores__emphasized inline-block">
             <span class="highscores__header">Congratulations!</span>
             <span class="weight-normal">You beat</span>
             #aurelia-minesweeper
@@ -16,22 +17,20 @@
             ${activeSubmission.time} seconds
             <span class="weight-normal">on</span>
             ${activeSubmission.settings.name} mode<span class="weight-normal">!&nbsp;</span>
-            <a class="twitter-share-button" href="https://twitter.com/intent/tweet" data-hashtags="aurelia-minesweeper"
-               data-text="I just beat #aurelia-minesweeper in ${activeSubmission.time} seconds on ${activeSubmission.settings.name} mode!">
-               Tweet
-             </a>
-          </h4>
+         </h4>
+         <tweet class="inline-block" text.bind="submissionText" hashtags="aurelia-minesweeper" />
         </div>
         <div class="small-1 columns">
-          <h4 class="float-right submission__close">X</h4>
+          <h4 class="float-right submission__close" click.delegate="closeSubmission()">X</h4>
         </div>
       </div>
       <div class="row">
         <div class="columns">
-          <span if.bind="activeSubmission.isHighscore">
+          <span if.bind="activeSubmission.isHighscore && !activeSubmission.isSubmitted">
             <input class="submission__name ${activeSubmission.isInvalid ? 'submission__name--invalid' : ''}" type="text" placeholder="Enter name" value.bind="activeSubmission.name" />
             <button class="submission__button" click.delegate="submit(activeSubmission)">Submit</button>
           </span>
+          <span if.bind="activeSubmission.isSubmitted">Highscore successfully submitted!</span>
         </div>
       </div>
     </div>

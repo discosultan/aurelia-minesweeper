@@ -1,4 +1,4 @@
-import {inject} from 'aurelia-framework';
+import {inject, computedFrom} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {RemoteHighscoreStorage} from '../storage/remoteHighscoreStorage';
 import {LocalHighscoreStorage} from '../storage/localHighscoreStorage';
@@ -34,11 +34,14 @@ export class Leaderboard {
 
     // TEMP
     // this._addDummyHighscores();
-    this.activeSubmission = { time: 15, settings: GameSettings.beginner(), isHighscore: true };
 
     eventAggregator.subscribe(GameStateChangedEvent, this._gameStateChanged.bind(this));
+  }
 
-    this._initializeTwitterWidgets();
+  @computedFrom('activeSubmission')
+  get submissionText() {
+    if (this.activeSubmission)
+      return `I just beat #aurelia-minesweeper in ${this.activeSubmission.time} seconds on ${this.activeSubmission.settings.name} mode!`;
   }
 
   getScores() {
@@ -52,22 +55,26 @@ export class Leaderboard {
     if (submission.name && !submission.name.match(/^\s+$/)) {
       console.log("SUBMIT");
       console.log(submission);
-      // this._storage.add(submission).then(() => {
-      //   this.getScores();
-      //   this.activeSubmission = null;
-      // });
+      this._storage.add(submission).then(() => {
+        submission.isSubmitted = true;
+        this.getScores();
+      });
     } else {
       submission.isInvalid = true;
     }
   }
 
+  closeSubmission() {
+    this.activeSubmission = null;
+  }
+
   _gameStateChanged(evt) {
     if (evt.currentState === GameState.Won) {
-      let submission = {
+      this.activeSubmission = {
         time: evt.minesweeper.gameTime,
-        settings: evt.minesweeper.settings,
+        settings: evt.minesweeper.settings
       };
-      submission.isHighscore = this._isHighscoreSubmission(submission);
+      this.activeSubmission.isHighscore = this._isHighscoreSubmission(this.activeSubmission);
     }
   }
 
@@ -83,12 +90,5 @@ export class Leaderboard {
       this._storage.set(key, catScores);
       break;
     }
-  }
-
-  _initializeTwitterWidgets() {
-    let doc = document;
-    let js = doc.createElement('script');
-    js.src = 'https://platform.twitter.com/widgets.js';
-    doc.body.appendChild(js);
   }
 }

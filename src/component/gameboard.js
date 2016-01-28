@@ -14,6 +14,15 @@ export class Gameboard {
   constructor(eventAggregator) {
     this._eventAggregator = eventAggregator;
     this._mouseUpCallback = this._onMouseUp.bind(this);
+
+    // TEMP!
+    window.addEventListener('keypress', (evt) => {
+       console.log(evt);
+      if (evt.which==119) {
+        console.log("yoooo");
+        this._eventAggregator.publish(new GameStateChangedEvent(this.minesweeper, GameState.Playing, GameState.Won));
+      }
+    });
   }
 
   attached() {

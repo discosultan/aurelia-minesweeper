@@ -30,11 +30,16 @@ export class LocalHighscoreStorage {
   //         this._storage.setItem(key, JSON.stringify(value));
   // }
   //
-  // add(submission) {
-  //   if (this_storage) {
-  //     let values = this.get(key);
-  //     values.push(value);
-  //     this.set(key, value);
-  //   }
-  // }
+  add(submission) {
+    return new Promise((resolve, reject) => {
+      if (this._storage) {
+        // let values = this.get(key);
+        // values.push(value);
+        // this.set(key, value);
+        resolve();
+      } else {
+        reject();
+      }
+    });
+  }
 }
