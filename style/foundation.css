@@ -1,6 +1,6 @@
 /**
  * Foundation for Sites by ZURB
- * Version 6.1.1
+ * Version 6.1.2
  * foundation.zurb.com
  * Licensed under MIT Open Source
  */
@@ -317,12 +317,13 @@ input[type="search"]::-webkit-search-decoration {
 
 /**
    * Define consistent border, margin, and padding.
+   * [NOTE] We don't enable this ruleset in Foundation, because we want the <fieldset> element to have plain styling.
    */
-fieldset {
-  border: 1px solid #c0c0c0;
-  margin: 0 2px;
-  padding: 0.35em 0.625em 0.75em; }
-
+/* fieldset {
+    border: 1px solid #c0c0c0;
+    margin: 0 2px;
+    padding: 0.35em 0.625em 0.75em;
+  } */
 /**
    * 1. Correct `color` not being inherited in IE 8/9/10/11.
    * 2. Remove padding so people aren't caught out if they zero out fieldsets.
@@ -418,6 +419,12 @@ button {
   border-radius: 3px;
   line-height: 1; }
 
+.is-visible {
+  display: block !important; }
+
+.is-hidden {
+  display: none !important; }
+
 .row {
   max-width: 62.5rem;
   margin-left: auto;
@@ -428,13 +435,11 @@ button {
   -webkit-flex-flow: row wrap;
       -ms-flex-flow: row wrap;
           flex-flow: row wrap; }
-  .row .row,
-  .column-row .row {
+  .row .row {
     margin-left: -0.625rem;
     margin-right: -0.625rem; }
     @media screen and (min-width: 40em) {
-      .row .row,
-      .column-row .row {
+      .row .row {
         margin-left: -0.9375rem;
         margin-right: -0.9375rem; } }
   .row.expanded {
@@ -453,6 +458,14 @@ button {
     .column, .columns {
       padding-left: 0.9375rem;
       padding-right: 0.9375rem; } }
+
+.column.row.row, .row.row.columns {
+  float: none; }
+  .row .column.row.row, .row .row.row.columns {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0; }
 
 .small-1 {
   -webkit-flex: 0 0 8.33333%;
@@ -871,7 +884,8 @@ button {
 .shrink {
   -webkit-flex: 0 0 auto;
       -ms-flex: 0 0 auto;
-          flex: 0 0 auto; }
+          flex: 0 0 auto;
+  max-width: 100%; }
 
 .row.align-right {
   -webkit-justify-content: flex-end;

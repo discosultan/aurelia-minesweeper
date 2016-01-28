@@ -1,15 +1,4 @@
-.brand {
-  height: 80px;
-}
-
-.github-badge {
-  display: inline-block;
-  vertical-align: middle;
-  line-height: 0;
-  margin: 10px 0 0 10px;
-}
-
-.section-header {
+.section__header {
   height: 80px;
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0 2px 4px rgba(0,0,0,.2);
@@ -18,13 +7,27 @@
   position: relative;
 }
 
-.section-settings {
-  /*height: 64px;*/
+.section__settings {
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0 2px 4px rgba(0,0,0,.2);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), inset 0 -2px 4px rgba(0, 0, 0, 0.2);
   position: relative;
   padding: 10px 0;
+}
+
+.section__gameboard {
+  margin: 0 auto;
+  padding: 20px 0;
+
+  text-align: center;
+
+  background-image: -webkit-gradient(linear, top, from(#6E4D9B), to(#E82887));
+  background-image: -webkit-linear-gradient(top, #6E4D9B, #E82887);
+  background-image: -moz-linear-gradient(top, #6E4D9B, #E82887);
+  background-image: linear-gradient(to top, #6E4D9B, #E82887);
+}
+
+.section__leaderboard {
 }
 
 /* CSS3-Animations */
@@ -47,14 +50,14 @@
     0%   { opacity: 1; }
     100% { opacity: 0; }
 }
-.section-settings > div.au-enter {
+.section__settings > div.au-enter {
   opacity: 0 !important;
 }
-.section-settings > div.au-enter-active {
+.section__settings > div.au-enter-active {
   -webkit-animation: fadeIn 2s;
   animation: fadeIn 2s;
 }
-.section-settings > div.au-leave-active {
+.section__settings > div.au-leave-active {
     -webkit-animation: fadeOut 2s;
     animation: fadeOut 2s;
 }
@@ -74,19 +77,13 @@
   display: none;
 }
 
-.section-middle {
-  margin: 0 auto;
-  text-align: center;
-
-  /*margin: 0;
-  padding: 0;*/
-  /*margin-top: -7px;*/
-  background-image: -webkit-gradient(linear, top, from(#6E4D9B), to(#E82887));
-  background-image: -webkit-linear-gradient(top, #6E4D9B, #E82887);
-  background-image: -moz-linear-gradient(top, #6E4D9B, #E82887);
-  background-image: linear-gradient(to top, #6E4D9B, #E82887);
+.brand {
+  height: 80px;
 }
 
-.section-footer {
-  color: #444444;
+.github-badge {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 0;
+  margin: 10px 0 0 10px;
 }

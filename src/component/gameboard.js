@@ -1,12 +1,11 @@
-import {bindable, inject, customElement} from 'aurelia-framework';
+import {bindable, inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {Minesweeper, GameState} from '../game/minesweeper';
 import {SquareState} from '../game/square';
 import {GameStateChangedEvent} from '../events';
 
 @inject(EventAggregator)
-@customElement('minesweeper')
-export class MinesweeperElement {
+export class Gameboard {
   GameState = GameState; // Expose GameState enum to the view.
   SquareState = SquareState; // Expose SquareState enum to the view.
 

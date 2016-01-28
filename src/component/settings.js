@@ -1,18 +1,16 @@
-import {bindable, inject, customElement} from 'aurelia-framework';
+import {bindable} from 'aurelia-framework';
 import {GameSettings, GameSettingsType} from '../game/settings';
 
 export class Settings {
-  @bindable settings = null;
   GameSettingsType = GameSettingsType; // Expose GameSettingsType enum to the view.
 
-  settingsComparer = (lhv, rhv) => lhv.type === rhv.type;
+  @bindable settings = null;
+  allSettings = [
+    GameSettings.beginner(),
+    GameSettings.intermediate(),
+    GameSettings.expert(),
+    GameSettings.custom()
+  ];
 
-  constructor() {
-    this.allSettings = [
-      GameSettings.beginner(),
-      GameSettings.intermediate(),
-      GameSettings.expert(),
-      GameSettings.custom()
-    ];
-  }
+  settingsComparer = (lhv, rhv) => lhv.type === rhv.type;
 }

@@ -3,14 +3,14 @@
   <require from="./base.css"></require>
   <require from="./app.css"></require>
   <require from="./component/settings"></require>
-  <require from="./component/minesweeper-board"></require>
-  <require from="./component/highscores"></require>
+  <require from="./component/gameboard"></require>
+  <require from="./component/leaderboard"></require>
 
   <!-- Brand and settings button -->
-  <header class="section-header">
+  <header class="section__header">
     <div class="row">
       <div class="small-10 columns align-middle">
-        <img class="brand" src="img/logo.png" alt="Aurelia">
+        <img class="brand" src="img/logo.png" alt="#aurelia-minesweeper">
         <div class="github-badge hide-for-small-only">
           <iframe src="https://ghbtns.com/github-btn.html?user=discosultan&repo=aurelia-minesweeper&type=star&count=none"
                   frameborder="0" scrolling="0" width="50px" height="24px"></iframe>
@@ -25,17 +25,17 @@
   </header>
 
   <!-- Minesweeper settings -->
-  <section class="section-settings ${settingsOpen ? '' : 'slider--closed'}">
+  <section class="section__settings ${settingsOpen ? '' : 'slider--closed'}">
     <settings settings.two-way="settings" />
   </section>
 
   <!-- Minesweeper game -->
-  <section class="section-middle">
-    <minesweeper class="inline-block" settings.bind="settings"></minesweeper>
+  <section class="section__gameboard">
+    <gameboard class="inline-block" settings.bind="settings" />
   </section>
 
   <!-- Minesweeper leaderboard -->
-  <section class="section-footer">
-    <highscores />
+  <section class="section__leaderboard">
+    <leaderboard />
   </section>
 </template>
