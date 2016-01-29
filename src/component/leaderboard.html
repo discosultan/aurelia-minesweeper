@@ -40,8 +40,7 @@
   <div class="row medium-unstack">
     <div class="columns highscores__category highscores__border" repeat.for="category of categories">
       <h4 class="highscores__header">${category.name}</h4>
-
-      <div class="row" repeat.for="entry of scores[category.type] | sort:'time':'ascending' | take:10">
+      <div class="row" repeat.for="entry of leaderboard[category.type] | sort:'time':'ascending' | take:10">
         <div class="columns small-2">${$index + 1}.</div>
         <div class="columns small-6">
           ${entry.name}
@@ -49,7 +48,7 @@
         </div>
         <div class="columns small-4 text-right">${entry.time}</div>
       </div>
-      <div class="row" if.bind="scores[category.type].length === 0">
+      <div class="row" if.bind="leaderboard[category.type].length === 0">
         <div class="columns">Nothing to show here.</div>
       </div>
     </div>
