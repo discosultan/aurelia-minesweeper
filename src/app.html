@@ -2,6 +2,7 @@
   <require from="./foundation.css"></require>
   <require from="./base.css"></require>
   <require from="./app.css"></require>
+  <require from="./utility/slide"></require>
   <require from="./component/settings"></require>
   <require from="./component/gameboard"></require>
   <require from="./component/leaderboard"></require>
@@ -24,8 +25,8 @@
     </div>
   </header>
 
-  <!-- Minesweeper settings -->
-  <section class="section__settings ${settingsOpen ? '' : 'slider--closed'}">
+  <!-- Minesweeper settings show.bind="settingsOpen" -->
+  <section  slide.bind="settingsOpen" class="section__settings">
     <settings settings.two-way="settings" />
   </section>
 

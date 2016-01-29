@@ -27,7 +27,8 @@
       <div class="row">
         <div class="columns">
           <span if.bind="activeSubmission.isHighscore && !activeSubmission.isSubmitted">
-            <input class="submission__name ${activeSubmission.isInvalid ? 'submission__name--invalid' : ''}" type="text" placeholder="Enter name" value.bind="activeSubmission.name" />
+            <input type="text" class="submission__name ${activeSubmission.isInvalid ? 'submission__name--invalid' : ''}"
+                   value.bind="activeSubmission.name" placeholder="Enter name" maxlength="24" />
             <button class="submission__button" click.delegate="submit(activeSubmission)">Submit</button>
           </span>
           <span if.bind="activeSubmission.isSubmitted">Highscore successfully submitted!</span>
@@ -41,12 +42,12 @@
     <div class="columns highscores__category highscores__border" repeat.for="category of categories">
       <h4 class="highscores__header">${category.name}</h4>
       <div class="row" repeat.for="entry of leaderboard[category.type] | sort:'time':'ascending' | take:10">
-        <div class="columns small-2">${$index + 1}.</div>
-        <div class="columns small-6">
+        <div class="columns small-1">${$index + 1}.</div>
+        <div class="columns small-9">
           ${entry.name}
           <img class="submission__flag highscores__border" if.bind="entry.country" src="img/flag/${entry.country}.png" />
         </div>
-        <div class="columns small-4 text-right">${entry.time}</div>
+        <div class="columns small-2 text-right">${entry.time}</div>
       </div>
       <div class="row" if.bind="leaderboard[category.type].length === 0">
         <div class="columns">Nothing to show here.</div>

@@ -11,8 +11,9 @@
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0 2px 4px rgba(0,0,0,.2);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), inset 0 -2px 4px rgba(0, 0, 0, 0.2);
-  position: relative;
-  padding: 10px 0;
+  position: relative;  
+  max-height: 0;
+  overflow-y: hidden;
 }
 
 .section__gameboard {
@@ -30,53 +31,6 @@
 .section__leaderboard {
 }
 
-/* CSS3-Animations */
-@-webkit-keyframes fadeIn {
-    0%   { opacity: 0; }
-    100% { opacity: 1; }
-}
-
-@keyframes fadeIn {
-    0%   { opacity: 0; }
-    100% { opacity: 1; }
-}
-
-@-webkit-keyframes fadeOut {
-    0%   { opacity: 1; }
-    100% { opacity: 0; }
-}
-
-@keyframes fadeOut {
-    0%   { opacity: 1; }
-    100% { opacity: 0; }
-}
-.section__settings > div.au-enter {
-  opacity: 0 !important;
-}
-.section__settings > div.au-enter-active {
-  -webkit-animation: fadeIn 2s;
-  animation: fadeIn 2s;
-}
-.section__settings > div.au-leave-active {
-    -webkit-animation: fadeOut 2s;
-    animation: fadeOut 2s;
-}
-
-
-.slider {
-	overflow-y: hidden;
-	max-height: 64px; /* approximate max height */
-
-	/*transition-property: all;
-	transition-duration: .5s;
-	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);*/
-}
-
-.slider--closed {
-	/*max-height: 0;*/
-  display: none;
-}
-
 .brand {
   height: 80px;
 }
@@ -86,4 +40,41 @@
   vertical-align: middle;
   line-height: 0;
   margin: 10px 0 0 10px;
+}
+
+/* CSS3-Animations */
+
+.slide {
+  max-height: 140px;
+  padding: 10px 0;
+}
+
+.slide-add {
+  -webkit-animation: slide-in 0.5s;
+  animation: slide-in 0.5s;
+}
+
+.slide-remove {
+  -webkit-animation: slide-out 0.5s;
+  animation: slide-out 0.5s;
+}
+
+@-webkit-keyframes slide-in {
+    0%   { max-height: 0; padding: 0; }
+    100% { max-height: 140px; padding: 10px 0; }
+}
+
+@keyframes slide-in {
+    0%   { max-height: 0; padding: 0; }
+    100% { max-height: 140px; padding: 10px 0; }
+}
+
+@-webkit-keyframes slide-out {
+    0%   { max-height: 140px; padding: 10px 0; }
+    100% { max-height: 0; padding: 0; }
+}
+
+@keyframes slide-out {
+    0%   { max-height: 140px; padding: 10px 0; }
+    100% { max-height: 0; padding: 0; }
 }

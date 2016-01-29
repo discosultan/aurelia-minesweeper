@@ -1,7 +1,7 @@
 .highscores__category, .highscores__submission {
   background: #FFFFFF;
   padding: 0 0 20px 0;
-  margin: 1%;
+  margin: 10px;
   color: #555;
 }
 
@@ -20,7 +20,7 @@
 }
 
 .highscores__submission {
-  margin: 1%;
+  margin: 10px;
 }
 
 .submission__name {
@@ -52,6 +52,6 @@
 }
 
 .submission__flag {
-  margin: 0 1%;
+  margin: 0 2px;
   max-width: 24px;
 }
