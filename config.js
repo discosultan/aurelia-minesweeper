@@ -1,27 +1,28 @@
 System.config({
-  "defaultJSExtensions": true,
-  "transpiler": "babel",
-  "babelOptions": {
+  defaultJSExtensions: true,
+  transpiler: "babel",
+  babelOptions: {
     "optional": [
       "es7.decorators",
       "es7.classProperties"
     ]
   },
-  "paths": {
+  paths: {
     "*": "dist/*",
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*",
     "twitter": "//platform.twitter.com/widgets.js"
   },
-  "meta": {
+  meta: {
     "twitter": {
       "format": "global",
       "exports": "twttr"
     }
   },
-  "map": {
+  map: {
     "aurelia-animator-css": "npm:aurelia-animator-css@1.0.0-beta.1.0.3",
     "aurelia-bootstrapper": "npm:aurelia-bootstrapper@1.0.0-beta.1.0.2",
+    "aurelia-event-aggregator": "npm:aurelia-event-aggregator@1.0.0-beta.1.1.0",
     "aurelia-fetch-client": "npm:aurelia-fetch-client@1.0.0-beta.1.1.0",
     "aurelia-framework": "npm:aurelia-framework@1.0.0-beta.1.0.8",
     "aurelia-history-browser": "npm:aurelia-history-browser@1.0.0-beta.1.1.0",

@@ -2,13 +2,15 @@
   "bundles": {
     "dist/app-build": {
       "includes": [
-        "[*]",
-        "*.html!text",
-        "*.css!text"
+        "[*.js]",
+        "*/**/*.html!text",
+        "*/**/*.css!text"
       ],
       "options": {
         "inject": true,
-        "minify": true
+        "minify": true,
+        "depCache": true,
+        "rev": true
       }
     },
     "dist/aurelia": {
@@ -23,7 +25,7 @@
         "aurelia-templating-router",
         "aurelia-loader-default",
         "aurelia-history-browser",
-        "aurelia-logging-console"        
+        "aurelia-logging-console"
       ],
       "options": {
         "inject": true,
