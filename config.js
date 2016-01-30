@@ -1,27 +1,25 @@
 System.config({
-  defaultJSExtensions: true,
-  transpiler: "babel",
-  babelOptions: {
+  "defaultJSExtensions": true,
+  "transpiler": "babel",
+  "babelOptions": {
     "optional": [
       "es7.decorators",
       "es7.classProperties"
     ]
   },
-  paths: {
+  "paths": {
     "*": "dist/*",
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*",
     "twitter": "//platform.twitter.com/widgets.js"
   },
-
-  meta: {
+  "meta": {
     "twitter": {
       "format": "global",
       "exports": "twttr"
     }
   },
-
-  map: {
+  "map": {
     "aurelia-animator-css": "npm:aurelia-animator-css@1.0.0-beta.1.0.3",
     "aurelia-bootstrapper": "npm:aurelia-bootstrapper@1.0.0-beta.1.0.2",
     "aurelia-fetch-client": "npm:aurelia-fetch-client@1.0.0-beta.1.1.0",
@@ -29,9 +27,11 @@ System.config({
     "aurelia-history-browser": "npm:aurelia-history-browser@1.0.0-beta.1.1.0",
     "aurelia-loader": "npm:aurelia-loader@1.0.0-beta.1.1.0",
     "aurelia-loader-default": "npm:aurelia-loader-default@1.0.0-beta.1.1.0",
+    "aurelia-logging": "npm:aurelia-logging@1.0.0-beta.1.1.1",
     "aurelia-logging-console": "npm:aurelia-logging-console@1.0.0-beta.1.1.3",
     "aurelia-metadata": "npm:aurelia-metadata@1.0.0-beta.1.1.3",
     "aurelia-pal": "npm:aurelia-pal@1.0.0-beta.1.1.1",
+    "aurelia-path": "npm:aurelia-path@1.0.0-beta.1.1.0",
     "aurelia-router": "npm:aurelia-router@1.0.0-beta.1.0.1",
     "aurelia-templating-binding": "npm:aurelia-templating-binding@1.0.0-beta.1.0.2",
     "aurelia-templating-resources": "npm:aurelia-templating-resources@1.0.0-beta.1.0.4",
@@ -209,4 +209,4 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2"
     }
   }
-});
+})
