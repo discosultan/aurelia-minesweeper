@@ -1,0 +1,6 @@
+- new game button @ settings
++ enter key to submit score @ submission
+- loading indicator when creating new board
+- remote storage
++ first square should have no adjacent mines
+- shuffle based mine distribution algorithm

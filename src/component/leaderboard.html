@@ -24,14 +24,15 @@
           <h4 class="float-right submission__close" click.delegate="closeSubmission()">X</h4>
         </div>
       </div>
-      <div class="row">
+      <div if.bind="activeSubmission.isHighscore" class="row">
         <div class="columns">
-          <span if.bind="activeSubmission.isHighscore && !activeSubmission.isSubmitted">
-            <input type="text" class="submission__name ${activeSubmission.isInvalid ? 'submission__name--invalid' : ''}"
-                   value.bind="activeSubmission.name" placeholder="Enter name" maxlength="24" />
-            <button class="submission__button" click.delegate="submit(activeSubmission)">Submit</button>
-          </span>
+          <input type="text" if.bind="!activeSubmission.isSubmitted"
+                 class="submission__name ${activeSubmission.isInvalid ? 'submission__name--invalid' : ''}"
+                 value.bind="activeSubmission.name" keypress.delegate="onSubmissionKeypress(activeSubmission, $event)"
+                 placeholder="Enter name" maxlength="24" />
+          <button class="submission__button" click.delegate="submit(activeSubmission)">Submit</button>
           <span if.bind="activeSubmission.isSubmitted">Highscore successfully submitted!</span>
+          <br /><br />
         </div>
       </div>
     </div>

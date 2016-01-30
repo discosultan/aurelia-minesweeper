@@ -90,15 +90,23 @@ export class Minesweeper {
         let random_x = Math.floor(Math.random() * this.settings.width);
         let random_y = Math.floor(Math.random() * this.settings.height);
         let square = this.squares[random_y][random_x];
-        if (square.numAdjacentMines >= 0 && square !== mineFreeSquare)
-          availableSquare = square;
+        if (!square.hasMine && square !== mineFreeSquare) {
+          let isAdjacentToMineFreeSquare = false;
+          this._performOnAdjacentSquares(mineFreeSquare, adjacentSquare => {
+            if (square === adjacentSquare)
+              isAdjacentToMineFreeSquare = true;
+          });
+          let numSquares = this.settings.width * this.settings.height;
+          if (!isAdjacentToMineFreeSquare || this.settings.numMines > numSquares - 9)
+            availableSquare = square;
+        }
       } while (!availableSquare);
 
       // Place mine to the randomly picked square indicated by a negative value.
       availableSquare.numAdjacentMines = -this.settings.numMines;
 
       // Increment all nearby squares of randomly picked square by one to count total number of mines in each square.
-      this._performOnAdjacentSquares(availableSquare, adjacentSquare => { adjacentSquare.numAdjacentMines++; });
+      this._performOnAdjacentSquares(availableSquare, adjacentSquare => adjacentSquare.numAdjacentMines++);
     }
   }
 
@@ -106,7 +114,7 @@ export class Minesweeper {
     if (square.open()) {
       this._ensureGameStarted(square);
       this.numOpened++;
-      if (square.numAdjacentMines < 0) // Opened a square with a mine on it!
+      if (square.hasMine) // Opened a square with a mine on it!
         this._onOpenedMinedSquare(square);
       else // Opened a safe square.
         this._onOpenedNormalSquare(square);
@@ -118,7 +126,7 @@ export class Minesweeper {
     this._timer.stop();
     this._setState(GameState.Lost);
     this._performOnAllSquares(square => {
-      if (square.numAdjacentMines < 0) {
+      if (square.hasMine) {
         square.press();
         square.open();
       }
@@ -129,7 +137,7 @@ export class Minesweeper {
     if (this.numOpened === this.settings.width*this.settings.height - this.settings.numMines) { // Matches win condition.
       this._timer.stop();
       this._setState(GameState.Won);
-      this._performOnAllSquares(square => { if (square.numAdjacentMines < 0) this._flagSquare(square); });
+      this._performOnAllSquares(square => { if (square.hasMine) this._flagSquare(square); });
     }
     if (normalSquare.numAdjacentMines === 0) // Square has no adjacent mines.
       this._performOnAdjacentSquares(normalSquare, adjacentSquare => {

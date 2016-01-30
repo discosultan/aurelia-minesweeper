@@ -3,8 +3,8 @@ export function configure(aurelia) {
     .defaultBindingLanguage()
     .defaultResources()
     .eventAggregator()
-    .plugin('aurelia-animator-css')
-    .developmentLogging();
+    .plugin('aurelia-animator-css');
+    // .developmentLogging();
 
   aurelia.start().then(a => a.setRoot());
 }

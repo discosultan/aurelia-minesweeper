@@ -19,14 +19,10 @@ export class Leaderboard {
 
     remoteLeaderboardStorage.isAvailable().then(
       () => {
-        console.log("REMOTE AVAILABLE");
         this._storage = remoteLeaderboardStorage;
         this.getScores();
       },
       () => {
-        console.log("REMOTE NOT AVAILABLE");
-        console.log("FALLBACK TO LOCAL");
-        console.log(localLeaderboardStorage);
         this._storage = localLeaderboardStorage;
         this.isUsingLocalStorage = true;
         this.getScores();
@@ -50,8 +46,6 @@ export class Leaderboard {
 
   submit(submission) {
     if (submission.name && !submission.name.match(/^\s+$/)) {
-      console.log("SUBMIT");
-      console.log(submission);
       this._storage.push(submission).then(() => {
         submission.isSubmitted = true;
         this.getScores();
@@ -59,6 +53,12 @@ export class Leaderboard {
     } else {
       submission.isInvalid = true;
     }
+  }
+
+  onSubmissionKeypress(submission, evt) {
+    if (evt.which === 13)
+      this.submit(submission);
+    return true;
   }
 
   closeSubmission() {
@@ -77,6 +77,6 @@ export class Leaderboard {
   }
 
   _isHighscoreSubmission(submission) {
-    return true;
+    return submission.settings.type !== GameSettingsType.Custom;
   }
 }

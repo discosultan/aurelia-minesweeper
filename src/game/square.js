@@ -8,6 +8,8 @@ export class Square {
     this.y = y;
   }
 
+  get hasMine() { return this.numAdjacentMines < 0; }
+
   // Any state mutation should happen through the methods below.
 
   press() {
