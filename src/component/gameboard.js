@@ -7,8 +7,8 @@ import {GameStateChangedEvent, NewGameRequestedEvent} from '../events';
 
 @inject(EventAggregator)
 export class Gameboard {
-  GameState = GameState; // Expose GameState enum to the view.
-  SquareState = SquareState; // Expose SquareState enum to the view.
+  GameState = GameState; // Expose the enum to the view.
+  SquareState = SquareState; // Expose the enum to the view.
 
   @bindable settings = null;
 

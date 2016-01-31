@@ -1,11 +1,11 @@
 import {bindable, inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
-import {GameSettings, GameSettingsType} from '../game/settings';
+import {GameSettings, GameDifficulty} from '../game/settings';
 import {NewGameRequestedEvent} from '../events';
 
 @inject(EventAggregator)
 export class Settings {
-  GameSettingsType = GameSettingsType; // Expose GameSettingsType enum to the view.
+  GameDifficulty = GameDifficulty; // Expose the enum to the view.
 
   @bindable settings = null;
   allSettings = [
@@ -15,7 +15,7 @@ export class Settings {
     GameSettings.custom()
   ];
 
-  settingsComparer = (lhv, rhv) => lhv.type === rhv.type;
+  settingsComparer = (lhv, rhv) => lhv.difficulty === rhv.difficulty;
 
   constructor(eventAggregator) {
     this._eventAggregator = eventAggregator;

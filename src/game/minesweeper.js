@@ -8,7 +8,7 @@ export class Minesweeper {
     if (settings.numMines >= settings.width*settings.height)
       throw `Number of mines must be less than ${settings.width*settings.height}!`;
 
-    this._timer = new Timer(() => this.gameTime++, 1000); // TODO: extract Timer dependency?
+    this._timer = new Timer(() => this.time++, 1000); // TODO: extract Timer dependency?
     this.settings = settings.clone();
 
     this.reset();
@@ -53,7 +53,7 @@ export class Minesweeper {
   reset() {
       this.numOpened = 0;
       this.numFlagged = 0;
-      this.gameTime = 0;
+      this.time = 0;
       this._initializeSquares();
       this._setState(GameState.ReadyToPlay);
       // Mines are placed when the user has opened the first square to ensure that first square is always mine-free.

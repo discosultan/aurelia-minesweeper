@@ -4,28 +4,29 @@ import {Key} from '../utility/input';
 import {RemoteLeaderboardStorage} from '../storage/remoteLeaderboardStorage';
 import {LocalLeaderboardStorage} from '../storage/localLeaderboardStorage';
 import {GameState} from '../game/minesweeper';
-import {GameSettings, GameSettingsType} from '../game/settings';
+import {GameSettings, GameDifficulty} from '../game/settings';
 import {GameStateChangedEvent} from '../events';
 
 // TODO: determine storage availability at DI container setup stage.
 @inject(EventAggregator, RemoteLeaderboardStorage, LocalLeaderboardStorage)
 export class Leaderboard {
   categories = [ GameSettings.expert(), GameSettings.intermediate(), GameSettings.beginner() ];
-  leaderboard = {};
+  categoriesMap = {};
+  leaderboard = { all: {} };
   activeSubmission = null;
 
   constructor(eventAggregator, remoteLeaderboardStorage, localLeaderboardStorage) {
-    for (let category of this.categories)
-        this.leaderboard[category.type] = [];
+    for (let category of this.categories) {
+      this.leaderboard.all[category.difficulty] = [];
+      this.categoriesMap[category.difficulty] = category;
+    }
 
     remoteLeaderboardStorage.isAvailable().then(
       () => {
-        console.log("USING REMOTE");
         this._storage = remoteLeaderboardStorage;
         this.getScores();
       },
       () => {
-        console.log("USING LOCAL");
         this._storage = localLeaderboardStorage;
         this.isUsingLocalStorage = true;
         this.getScores();
@@ -36,14 +37,15 @@ export class Leaderboard {
 
   get submissionText() {
     if (this.activeSubmission)
-      return `I just beat #aurelia-minesweeper in ${this.activeSubmission.time} seconds on ${this.activeSubmission.settings.name} mode!`;
+      return `I just beat #aurelia-minesweeper in ${this.activeSubmission.time} seconds on ${this.categoriesMap[this.activeSubmission.difficulty]} mode!`;
   }
 
   getScores() {
     this._storage.get().then(leaderboard => {
+      console.log(leaderboard);
       if (leaderboard)
-        for (var key in leaderboard)
-          this.leaderboard[key] = leaderboard[key];
+        for (var key in leaderboard.all)
+          this.leaderboard.all[key] = leaderboard.all[key];
     });
   }
 
@@ -73,15 +75,14 @@ export class Leaderboard {
   _gameStateChanged(evt) {
     if (evt.currentState === GameState.Won) {
       this.activeSubmission = {
-        time: evt.minesweeper.gameTime,
-        settings: evt.minesweeper.settings,
-        country: 'ee' // TODO: TEMP
+        time: evt.minesweeper.time,
+        difficulty: evt.minesweeper.settings.difficulty
       };
       this.activeSubmission.isHighscore = this._isHighscoreSubmission(this.activeSubmission);
     }
   }
 
   _isHighscoreSubmission(submission) {
-    return submission.settings.type !== GameSettingsType.Custom;
+    return submission.difficulty !== GameDifficulty.Custom;
   }
 }

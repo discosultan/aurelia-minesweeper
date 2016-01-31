@@ -1,5 +1,5 @@
 export class LocalLeaderboardStorage {
-  _key = 'leaderboard';
+  _key = 'leaderboard_v1';
 
   constructor() {
       this._storage = window.localStorage; // TODO: extract dependency from window object.
@@ -17,8 +17,8 @@ export class LocalLeaderboardStorage {
   get() {
     return new Promise((resolve, reject) => {
       if (this._storage) {
-        let storageBlob = this._getBlob();
-        resolve(storageBlob);
+        let leaderboard = this._getBlob();
+        resolve(leaderboard);
       } else {
         reject();
       }
@@ -28,17 +28,17 @@ export class LocalLeaderboardStorage {
   push(submission) {
     return new Promise((resolve, reject) => {
       if (this._storage) {
-        let storageBlob = this._getBlob();
-        if (!storageBlob)
-          storageBlob = {};
+        let leaderboard = this._getBlob();
+        if (!leaderboard)
+          leaderboard = { all: {} };
 
-        let scores = storageBlob[submission.settings.type];
+        let scores = leaderboard.all[submission.difficulty];
         if (!scores) {
           scores = [];
-          storageBlob[submission.settings.type] = scores;
+          leaderboard.all[submission.difficulty] = scores;
         }
         scores.push(submission);
-        this._storage.setItem(this._key, JSON.stringify(storageBlob));
+        this._storage.setItem(this._key, JSON.stringify(leaderboard));
         resolve();
       } else {
         reject();

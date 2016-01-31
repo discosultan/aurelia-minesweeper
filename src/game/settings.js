@@ -1,6 +1,6 @@
 export class GameSettings {
-  constructor(type, name, width, height, numMines) {
-    this.type = type;
+  constructor(difficulty, name, width, height, numMines) {
+    this.difficulty = difficulty;
     this.name = name;
     this.width = width;
     this.height = height;
@@ -18,23 +18,23 @@ export class GameSettings {
   }
 
   static beginner() {
-    return new GameSettings(GameSettingsType.Beginner, 'Beginner', 9, 9, 10);
+    return new GameSettings(GameDifficulty.Beginner, 'Beginner', 9, 9, 10);
   }
 
   static intermediate() {
-    return new GameSettings(GameSettingsType.Intermediate, 'Intermediate', 16, 16, 40);
+    return new GameSettings(GameDifficulty.Intermediate, 'Intermediate', 16, 16, 40);
   }
 
   static expert() {
-    return new GameSettings(GameSettingsType.Expert, 'Expert', 30, 16, 99);
+    return new GameSettings(GameDifficulty.Expert, 'Expert', 30, 16, 99);
   }
 
   static custom() {
-    return new GameSettings(GameSettingsType.Custom, 'Custom', 30, 20, 145);
+    return new GameSettings(GameDifficulty.Custom, 'Custom', 30, 20, 145);
   }
 }
 
-export const GameSettingsType = {
+export const GameDifficulty = {
   Beginner: 1,
   Intermediate: 2,
   Expert: 4,
