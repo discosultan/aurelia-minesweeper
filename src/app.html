@@ -1,6 +1,5 @@
 <template>
-  <require from="./foundation.css"></require>
-  <require from="./base.css"></require>
+  <!-- <require from="./foundation.css"></require> -->
   <require from="./app.css"></require>
   <require from="./utility/slide"></require>
   <require from="./component/settings"></require>
@@ -19,7 +18,7 @@
       </div>
       <div class="small-2 columns align-middle">
         <a href="javascript:void(0)" click.delegate="settingsOpen = !settingsOpen">
-          <img class="float-right" src="img/settings.png" width="42px" height="42px" />
+          <img class="float-right" src="img/settings.png" width="42px" height="42px">
         </a>
       </div>
     </div>
@@ -27,16 +26,16 @@
 
   <!-- Minesweeper settings show.bind="settingsOpen" -->
   <section  slide.bind="settingsOpen" class="section__settings">
-    <settings settings.two-way="settings" />
+    <settings settings.two-way="settings" keydown.delegate="onSettingsKeydown($event)">
   </section>
 
   <!-- Minesweeper game -->
   <section class="section__gameboard">
-    <gameboard class="inline-block" settings.bind="settings" />
+    <gameboard class="inline-block" settings.bind="settings">
   </section>
 
   <!-- Minesweeper leaderboard -->
   <section class="section__leaderboard">
-    <leaderboard />
+    <leaderboard>
   </section>
 </template>

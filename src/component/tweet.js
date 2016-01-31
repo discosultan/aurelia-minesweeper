@@ -1,5 +1,5 @@
 import {bindable, inject, computedFrom, BindingEngine, TaskQueue} from 'aurelia-framework';
-import $ from 'twitter'; // This will load 'twttr' as global.
+import 'twitter'; // This will load 'twttr' as global.
 
 @inject(BindingEngine, TaskQueue)
 export class Tweet {

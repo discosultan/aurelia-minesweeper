@@ -30,7 +30,7 @@ export class GameSettings {
   }
 
   static custom() {
-    return new GameSettings(GameSettingsType.Custom, 'Custom');
+    return new GameSettings(GameSettingsType.Custom, 'Custom', 30, 20, 145);
   }
 }
 

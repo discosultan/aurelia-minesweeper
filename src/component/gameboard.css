@@ -36,11 +36,12 @@
   margin: 2px 0 0 2px;
 }
 
-.minefield {
-  margin-top: 10px;
+.minefield {  
   -webkit-box-shadow: 0 4px 40px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 0 4px 40px rgba(0, 0, 0, 0.4);
   box-shadow: 0 4px 40px rgba(0, 0, 0, 0.4);
+  display: table;
+  margin: 10px auto auto auto;
 }
 
 .board__header {

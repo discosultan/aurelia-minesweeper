@@ -1,8 +1,9 @@
 import {bindable, inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
+import {MouseButton} from '../utility/input';
 import {Minesweeper, GameState} from '../game/minesweeper';
 import {SquareState} from '../game/square';
-import {GameStateChangedEvent} from '../events';
+import {GameStateChangedEvent, NewGameRequestedEvent} from '../events';
 
 @inject(EventAggregator)
 export class Gameboard {
@@ -15,11 +16,11 @@ export class Gameboard {
     this._eventAggregator = eventAggregator;
     this._mouseUpCallback = this._onMouseUp.bind(this);
 
+    this._eventAggregator.subscribe(NewGameRequestedEvent, () => this.restart());
+
     // TEMP!
     window.addEventListener('keypress', (evt) => {
-       console.log(evt);
-      if (evt.which==119) {
-        console.log("yoooo");
+      if (evt.which==119) { // W
         this._eventAggregator.publish(new GameStateChangedEvent(this.minesweeper, GameState.Playing, GameState.Won));
       }
     });
@@ -105,8 +106,3 @@ export class Gameboard {
     }
   }
 }
-
-const MouseButton = {
-  Left: 1,
-  Right: 3
-};

@@ -1,7 +1,7 @@
 <template>
   <require from="./gameboard.css"></require>
 
-  <!-- Minefield labels -->
+  <!-- Labels and smiley -->
   <div class="row board__header">
     <div class="small-4 columns label no-padding no-wrap">
       <img class="label__icon" src="img/mine.png" alt="mines">
@@ -25,17 +25,17 @@
   </div>
 
   <!-- Minefield -->
-  <div class="minefield">
+  <div class="minefield no-wrap">
     <div repeat.for="row of minesweeper.squares" class="no-wrap">
       <div repeat.for="square of row"
-           class="square color-${square.numAdjacentMines} ${(square.state === SquareState.Open || square.state === SquareState.Pressed) ? 'square--open' : 'square--closed'} ${square.causedGameOver ? 'game-over' : ''}"
+           class="square no-wrap color-${square.numAdjacentMines} ${(square.state === SquareState.Open || square.state === SquareState.Pressed) ? 'square--open' : 'square--closed'} ${square.causedGameOver ? 'game-over' : ''}"
            mousedown.delegate="onSquareMouseDown(square, $event)"
            mouseup.delegate="onSquareMouseUp(square, $event)"
            mouseover.delegate="onSquareMouseOver(square, $event)"
            mouseout.delegate="onSquareMouseOut(square, $event)"
            contextmenu.delegate="onSquareContextMenu(square, $event)">
-        <img class="square__image" if.bind="square.state === SquareState.Open && square.numAdjacentMines < 0" src="img/mine.png" alt="mine" />
-        <img class="square__image" if.bind="square.state === SquareState.Flagged" src="img/flag.png" alt="flag" />
+        <img class="square__image" if.bind="square.state === SquareState.Open && square.numAdjacentMines < 0" src="img/mine.png" alt="mine">
+        <img class="square__image" if.bind="square.state === SquareState.Flagged" src="img/flag.png" alt="flag">
         <span if.bind="square.state === SquareState.Open && square.numAdjacentMines > 0">${square.numAdjacentMines}</span>
       </div>
     </div>

@@ -3,7 +3,6 @@ import {Timer} from '../utility/timer';
 
 export class Minesweeper {
   constructor (settings) {
-    // Guard clauses.
     if (settings.width < 1 || settings.height < 1)
       throw `Minefield width and height must be larger than zero!`;
     if (settings.numMines >= settings.width*settings.height)
@@ -61,11 +60,11 @@ export class Minesweeper {
   }
 
   _initializeSquares() {
-    this.squares = [];
+    this.squares = new Array(this.settings.height);
     for (let y = 0; y < this.settings.height; y++) {
-      this.squares.push([]);
+      this.squares[y] = new Array(this.settings.width);
       for (let x = 0; x < this.settings.width; x++)
-          this.squares[y].push(new Square(x, y));
+          this.squares[y][x] = new Square(x, y);
     }
   }
 
@@ -81,6 +80,12 @@ export class Minesweeper {
     this.state = newState;
   }
 
+  // Mines are distributed using a very naive approach where remaining mines are
+  // randomly attempted to be placed until all of them are in place.
+  // Much better alternatives would be using Fisher-Yates (Knuth) shuffle or
+  // random traversal of the squares using a Prime Search approach.
+  // Since DOM rendering of big game boards is slow and inefficient, we wouldn't
+  // win much in applying one of the more complex apporaches.
   _randomlyDistributeMines(mineFreeSquare) {
     // Place mines and count nearby mines.
     for (let i = 0; i < this.settings.numMines; i++) {
@@ -163,10 +168,11 @@ export class Minesweeper {
   }
 
   _performOnAdjacentSquares(square, action) {
-    for (let offset_y = square.y - 1; offset_y <= square.y + 1; offset_y++)
-      for (let offset_x = square.x - 1; offset_x <= square.x + 1; offset_x++)
-        if (offset_x >= 0 && offset_y >= 0 && offset_x < this.settings.width && offset_y < this.settings.height && (offset_x !== square.x || offset_y !== square.y))
-          action(this.squares[offset_y][offset_x]);
+    for (let y = square.y - 1; y <= square.y + 1; y++) {
+      for (let x = square.x - 1; x <= square.x + 1; x++)
+        if (x >= 0 && y >= 0 && x < this.settings.width && y < this.settings.height && (x !== square.x || y !== square.y))
+          action(this.squares[y][x]);
+    }
   }
 }
 

@@ -19,3 +19,19 @@ h1, h2, h3, h4, h5, h6 {
 
 .inline-block { display: inline-block; }
 .inline { display: inline; }
+
+.clear-left { clear: left; }
+
+.center {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.center > .columns {
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -o-transform:translate(-50%, -50%);
+  -ms-transform:translate(-50%, -50%);
+}

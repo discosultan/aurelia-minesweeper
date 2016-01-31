@@ -5,3 +5,6 @@ export class GameStateChangedEvent {
     this.currentState = currentState;
   }
 }
+
+export class NewGameRequestedEvent {  
+}

@@ -1,5 +1,6 @@
 import {inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
+import {Key} from '../utility/input';
 import {RemoteLeaderboardStorage} from '../storage/remoteLeaderboardStorage';
 import {LocalLeaderboardStorage} from '../storage/localLeaderboardStorage';
 import {GameState} from '../game/minesweeper';
@@ -19,10 +20,12 @@ export class Leaderboard {
 
     remoteLeaderboardStorage.isAvailable().then(
       () => {
+        console.log("USING REMOTE");
         this._storage = remoteLeaderboardStorage;
         this.getScores();
       },
       () => {
+        console.log("USING LOCAL");
         this._storage = localLeaderboardStorage;
         this.isUsingLocalStorage = true;
         this.getScores();
@@ -55,9 +58,11 @@ export class Leaderboard {
     }
   }
 
-  onSubmissionKeypress(submission, evt) {
-    if (evt.which === 13)
+  onSubmissionKeydown(submission, evt) {
+    if (evt.which === Key.Enter)
       this.submit(submission);
+    else if (evt.which === Key.Escape)
+      this.closeSubmission();
     return true;
   }
 

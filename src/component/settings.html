@@ -22,15 +22,20 @@
       </div>
       <div class="small-2 columns">
         <span if.bind="entry.type !== GameSettingsType.Custom">${entry.width}</span>
-        <input class="settings__input" if.bind="entry.type === GameSettingsType.Custom" value.bind="entry.width" type="number" min="1" step="1"/ />
+        <input class="settings__input" if.bind="entry.type === GameSettingsType.Custom" value.bind="entry.width" type="number" min="1" max="100" step="1"/ />
       </div>
       <div class="small-2 columns">
         <span if.bind="entry.type !== GameSettingsType.Custom">${entry.height}</span>
-        <input class="settings__input" if.bind="entry.type === GameSettingsType.Custom" value.bind="entry.height" type="number" min="1" step="1"/ />
+        <input class="settings__input" if.bind="entry.type === GameSettingsType.Custom" value.bind="entry.height" type="number" min="1" max="100" step="1"/ />
       </div>
       <div class="small-2 columns">
         <span if.bind="entry.type !== GameSettingsType.Custom">${entry.numMines}</span>
-        <input class="settings__input" if.bind="entry.type === GameSettingsType.Custom" value.bind="entry.numMines" type="number" min="0" step="1"/ />
+        <input class="settings__input" if.bind="entry.type === GameSettingsType.Custom" value.bind="entry.numMines" type="number" min="0" max="9999" step="1"/ />
+      </div>
+    </div>
+    <div class="row">
+      <div class="columns">
+        <button class="settings__button" click.delegate="newGame()">New Game</button>
       </div>
     </div>
   </div>
