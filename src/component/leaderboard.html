@@ -53,7 +53,7 @@
           </div>
           <div class="small-2 columns text-right">${entry.time}</div>
         </div>
-        <div class="row" if.bind="leaderboard[category.difficulties].length === 0">
+        <div class="row" if.bind="leaderboard.all[category.difficulty].length === 0">
           <div class="columns">Nothing to show here.</div>
         </div>
       </div>
