@@ -16,14 +16,7 @@ export class Gameboard {
     this._eventAggregator = eventAggregator;
     this._mouseUpCallback = this._onMouseUp.bind(this);
 
-    this._eventAggregator.subscribe(NewGameRequestedEvent, () => this.restart());
-
-    // TEMP!
-    window.addEventListener('keypress', (evt) => {
-      if (evt.which==119) { // W
-        this._eventAggregator.publish(new GameStateChangedEvent(this.minesweeper, GameState.Playing, GameState.Won));
-      }
-    });
+    this._eventAggregator.subscribe(NewGameRequestedEvent, _ => this.restart());
   }
 
   attached() {

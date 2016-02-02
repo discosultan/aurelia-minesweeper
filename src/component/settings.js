@@ -22,6 +22,6 @@ export class Settings {
   }
 
   newGame() {
-    this._eventAggregator.publish(new NewGameRequestedEvent());
+    this._eventAggregator.publish(new NewGameRequestedEvent(this.settings));
   }
 }

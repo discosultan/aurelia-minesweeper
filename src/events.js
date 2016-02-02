@@ -6,5 +6,8 @@ export class GameStateChangedEvent {
   }
 }
 
-export class NewGameRequestedEvent {  
+export class NewGameRequestedEvent {
+  constructor(settings) {
+    this.settings = settings;
+  }
 }
