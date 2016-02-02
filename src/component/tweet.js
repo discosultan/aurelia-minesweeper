@@ -36,6 +36,7 @@ export class Tweet {
   detached() {
     for (let subscription of this._subscriptions)
       subscription.dispose();
+    this._subscriptions.length = 0;
   }
 
   // Since the twttr widget loader REMOVES the template anchor tag from the DOM, we need a way to
