@@ -47,11 +47,11 @@
         <h4 class="highscores__header">${category.name}</h4>
         <div class="row" repeat.for="entry of leaderboard.all[category.difficulty] | sort:'time':'ascending' | take:10">
           <div class="small-1 columns">${$index + 1}.</div>
-          <div class="small-9 columns">
+          <div class="small-8 columns">
             ${entry.name}
             <img class="submission__flag highscores__border" if.bind="entry.country" src="img/flag/${entry.country}.png">
           </div>
-          <div class="small-2 columns text-right">${entry.time}</div>
+          <div class="small-3 columns text-right">${entry.time}</div>
         </div>
         <div class="row" if.bind="leaderboard.all[category.difficulty].length === 0">
           <div class="columns">Nothing to show here.</div>
