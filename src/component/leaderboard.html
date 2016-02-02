@@ -16,7 +16,7 @@
             <span class="weight-normal">in</span>
             ${activeSubmission.time} seconds
             <span class="weight-normal">on</span>
-            ${activeSubmission.settings.name} mode<span class="weight-normal">!&nbsp;</span>
+            ${categoriesMap[activeSubmission.difficulty].name} mode<span class="weight-normal">!&nbsp;</span>
             <tweet class="inline-block" text.bind="submissionText" hashtags="aurelia-minesweeper" />
          </h4>
         </div>
@@ -33,7 +33,7 @@
                    placeholder="Enter name" maxlength="24" />
             <button class="submission__button" click.delegate="submit(activeSubmission)">Submit</button>
           </span>
-          <span if.bind="activeSubmission.isSubmitted">Highscore successfully submitted!</span>
+          <span if.bind="activeSubmission.isSubmitted">Highscore submitted!</span>
           <br><br>
         </div>
       </div>

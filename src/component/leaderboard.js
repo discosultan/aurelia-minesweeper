@@ -7,7 +7,7 @@ import {GameState} from '../game/minesweeper';
 import {GameSettings, GameDifficulty} from '../game/settings';
 import {GameStateChangedEvent} from '../events';
 
-// TODO: determine storage availability at DI container setup stage.
+// TODO: determine storage availability at DI container setup stage?
 @inject(EventAggregator, RemoteLeaderboardStorage, LocalLeaderboardStorage)
 export class Leaderboard {
   categories = [ GameSettings.expert(), GameSettings.intermediate(), GameSettings.beginner() ];
@@ -21,12 +21,14 @@ export class Leaderboard {
       this.categoriesMap[category.difficulty] = category;
     }
 
+    // Check if remote storage is available.
     remoteLeaderboardStorage.isAvailable().then(
       () => {
         this._storage = remoteLeaderboardStorage;
         this.getScores();
       },
       () => {
+        // Fallback to local storage.
         this._storage = localLeaderboardStorage;
         this.isUsingLocalStorage = true;
         this.getScores();
@@ -37,12 +39,11 @@ export class Leaderboard {
 
   get submissionText() {
     if (this.activeSubmission)
-      return `I just beat #aurelia-minesweeper in ${this.activeSubmission.time} seconds on ${this.categoriesMap[this.activeSubmission.difficulty]} mode!`;
+      return `I just beat #aurelia-minesweeper in ${this.activeSubmission.time} seconds on ${this.categoriesMap[this.activeSubmission.difficulty].name} mode!`;
   }
 
   getScores() {
     this._storage.get().then(leaderboard => {
-      console.log(leaderboard);
       if (leaderboard)
         for (var key in leaderboard.all)
           this.leaderboard.all[key] = leaderboard.all[key];
@@ -51,8 +52,8 @@ export class Leaderboard {
 
   submit(submission) {
     if (submission.name && !submission.name.match(/^\s+$/)) {
+      submission.isSubmitted = true;
       this._storage.push(submission).then(() => {
-        submission.isSubmitted = true;
         this.getScores();
       });
     } else {
