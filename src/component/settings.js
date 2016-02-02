@@ -1,5 +1,6 @@
 import {bindable, inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
+import {Key} from '../utility/input';
 import {GameSettings, GameDifficulty} from '../game/settings';
 import {NewGameRequestedEvent} from '../events';
 
@@ -23,5 +24,11 @@ export class Settings {
 
   newGame() {
     this._eventAggregator.publish(new NewGameRequestedEvent(this.settings));
+  }
+
+  onKeypress(evt) {
+    if (evt.which === Key.Enter)
+      this.newGame();
+    return true;
   }
 }
