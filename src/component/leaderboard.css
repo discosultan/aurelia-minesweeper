@@ -1,11 +1,10 @@
 .highscores__category, .highscores__submission {
-  /*margin: 10px;*/
   background: #FFFFFF;
   color: #555555;
 }
 
 .highscores__container {
-    padding: 10px;
+  padding: 10px;
 }
 
 .highscores__category {
