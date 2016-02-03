@@ -3,10 +3,8 @@ import {Timer} from '../utility/timer';
 
 export class Minesweeper {
   constructor (settings) {
-    if (settings.width < 1 || settings.height < 1)
-      throw `Minefield width and height must be larger than zero!`;
-    if (settings.numMines >= settings.width*settings.height)
-      throw `Number of mines must be less than ${settings.width*settings.height}!`;
+    if (!settings.isValid())
+      throw `Minefield width and height must be larger than zero and number of mines must be less than ${settings.width*settings.height}!`;    
 
     this._timer = new Timer(() => this.time++, 1000); // TODO: extract Timer dependency?
     this.settings = settings.clone();
