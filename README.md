@@ -1,6 +1,6 @@
 ## What is this sorcery?
 
-\#aurelia-minesweeper is a full implementation of [Minesweeper](https://en.wikipedia.org/wiki/Minesweeper_(video_game) using the [Aurelia framework](http://aurelia.io/). This project was created with the sole intent of learning the basics of Aurelia.
+\#aurelia-minesweeper is a full implementation of [Minesweeper](https://en.wikipedia.org/wiki/Minesweeper_(video_game)) using the [Aurelia framework](http://aurelia.io/). This project was created with the sole intent of learning the basics of Aurelia.
 
 ![Screenshot](screenshot.jpg)
 
