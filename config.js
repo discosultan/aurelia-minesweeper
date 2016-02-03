@@ -13,14 +13,12 @@ System.config({
     "npm:*": "jspm_packages/npm/*",
     "twitter": "//platform.twitter.com/widgets.js"
   },
-
   meta: {
     "twitter": {
       "format": "global",
       "exports": "twttr"
     }
   },
-
   map: {
     "aurelia-animator-css": "npm:aurelia-animator-css@1.0.0-beta.1.1.0",
     "aurelia-bootstrapper": "npm:aurelia-bootstrapper@1.0.0-beta.1.1.1",
@@ -202,4 +200,4 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2"
     }
   }
-});
+})
