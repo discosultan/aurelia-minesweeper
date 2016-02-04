@@ -2,34 +2,37 @@
   <require from="./settings.css"></require>
 
   <div class="row">
-    <div class="small-6 columns">
+    <div class="small-6 medium-3 columns">
     </div>
-    <div class="small-2 columns">
+    <div class="small-2 medium-3 columns">
       <h4 class="inline">Width</h4>
     </div>
-    <div class="small-2 columns">
+    <div class="small-2 medium-3 columns">
       <h4 class="inline">Height</h4>
     </div>
-    <div class="small-2 columns">
+    <div class="small-2 medium-3 columns">
       <h4 class="inline">Mines</h4>
     </div>
   </div>
   <div class="row" repeat.for="entry of allSettings">
-    <div class="small-6 columns">
+    <div class="small-6 medium-3 columns">
       <input id="diff-${entry.difficulty}" type="radio" name="diff" model.bind="entry" checked.bind="settings" matcher.bind="settingsComparer" />
       <label for="diff-${entry.difficulty}"><h4 class="inline">&nbsp;${entry.name}</h4></label>
     </div>
-    <div class="small-2 columns">
+    <div class="small-2 medium-3 columns">
       <span if.bind="entry.difficulty !== GameDifficulty.Custom">${entry.width}</span>
-      <input class="settings__input" if.bind="entry.difficulty === GameDifficulty.Custom" value.bind="entry.width" type="number" min="1" max="100" step="1"/ />
+      <input if.bind="entry.difficulty === GameDifficulty.Custom" value.bind="entry.width" disabled.bind="settings !== entry"
+             class="settings__input" type="number" min="1" max="100" step="1"/ />
     </div>
-    <div class="small-2 columns">
+    <div class="small-2 medium-3 columns">
       <span if.bind="entry.difficulty !== GameDifficulty.Custom">${entry.height}</span>
-      <input class="settings__input" if.bind="entry.difficulty === GameDifficulty.Custom" value.bind="entry.height" type="number" min="1" max="100" step="1"/ />
+      <input if.bind="entry.difficulty === GameDifficulty.Custom" value.bind="entry.height" disabled.bind="settings !== entry"
+             class="settings__input" type="number" min="1" max="100" step="1"/ />
     </div>
-    <div class="small-2 columns">
+    <div class="small-2 medium-3 columns">
       <span if.bind="entry.difficulty !== GameDifficulty.Custom">${entry.numMines}</span>
-      <input class="settings__input" if.bind="entry.difficulty === GameDifficulty.Custom" value.bind="entry.numMines" type="number" min="0" max="9999" step="1"/ />
+      <input if.bind="entry.difficulty === GameDifficulty.Custom" value.bind="entry.numMines" disabled.bind="settings !== entry"
+             class="settings__input" type="number" min="0" max="9999" step="1"/ />
     </div>
   </div>
   <div class="row">
