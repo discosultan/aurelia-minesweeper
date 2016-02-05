@@ -3,13 +3,13 @@
     "index.html",
     "config.js",
     "favicon.ico",
-    "LICENSE",
     "jspm_packages/system.js",
+    "jspm_packages/system.js.map",
     "jspm_packages/system-polyfills.js",
     "jspm_packages/system-csp-production.js",
-    "styles/base.css",
-    "styles/foundation.css",
-    "styles/module.css",
+    "style/base.css",
+    "style/foundation.css",
+    "img/**/*.*",
     "jspm_packages/github/github/fetch@0.10.1.js",
     "jspm_packages/github/github/fetch@0.10.1/fetch.js"
   ]

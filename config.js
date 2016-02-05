@@ -10,14 +10,7 @@ System.config({
   paths: {
     "*": "dist/*",
     "github:*": "jspm_packages/github/*",
-    "npm:*": "jspm_packages/npm/*",
-    "twitter": "//platform.twitter.com/widgets.js"
-  },
-  meta: {
-    "twitter": {
-      "format": "global",
-      "exports": "twttr"
-    }
+    "npm:*": "jspm_packages/npm/*"    
   },
   map: {
     "aurelia-animator-css": "npm:aurelia-animator-css@1.0.0-beta.1.1.0",

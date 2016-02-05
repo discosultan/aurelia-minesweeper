@@ -1,5 +1,5 @@
 import {bindable, inject, computedFrom, BindingEngine, TaskQueue} from 'aurelia-framework';
-import 'twitter'; // This will load 'twttr' as global.
+// import 'twitter'; // This will load 'twttr' as global.
 
 @inject(BindingEngine, TaskQueue)
 export class Tweet {
@@ -24,6 +24,7 @@ export class Tweet {
   constructor(bindingEngine, taskQueue) {
     this._bindingEngine = bindingEngine;
     this._taskQueue = taskQueue;
+    this.url = window.location.protocol + '//' + window.location.host; // Remove dependency to window?
   }
 
   attached() {

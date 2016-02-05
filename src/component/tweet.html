@@ -1,3 +1,8 @@
 <template>
-  <div show.bind="visible" innerHTML.bind="templateContent"></div>
+  <require from="../utility/html-encode"></require>
+
+  <!-- <div show.bind="visible" innerHTML.bind="templateContent"></div> -->
+  <a href="https://twitter.com/intent/tweet?text=${text | html-encode}&amp;url=${url}&amp;hashtags=${hashtags}" target="_blank">
+    <strong>Share on Twitter</strong>
+  </a>
 </template>
