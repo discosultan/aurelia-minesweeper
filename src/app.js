@@ -9,7 +9,7 @@ export class App {
   settingsOpen = false;
   settings = GameSettings.beginner();
 
-  constructor(eventAggregator) {
+  constructor(eventAggregator) {    
     eventAggregator.subscribe(NewGameRequestedEvent, evt => {
       if (evt.settings.isValid())
         this.settingsOpen = false;

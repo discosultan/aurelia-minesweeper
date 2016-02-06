@@ -2,7 +2,7 @@
   <require from="../utility/sort"></require>
   <require from="../utility/take"></require>
   <require from="./leaderboard.css"></require>
-  <require from="./tweet"></require>
+  <require from="./social/tweet"></require>
 
   <!-- Highscore submission -->
   <div class="row highscores__container" if.bind="activeSubmission" keydown.delegate="onSubmissionKeydown(activeSubmission, $event)">
@@ -42,7 +42,7 @@
 
   <!-- Highscore categories -->
   <div class="row medium-unstack">
-    <div class="columns highscores__container" repeat.for="category of categories">
+    <div class="columns highscores__container" repeat.for="category of visibleCategories">
       <div class="highscores__category highscores__border">
         <h4 class="highscores__header">${category.name}</h4>
         <div class="row" repeat.for="entry of leaderboard.all[category.difficulty] | sort:'time':'ascending' | take:10">

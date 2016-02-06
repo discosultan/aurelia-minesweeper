@@ -1,4 +1,4 @@
-import {inject} from 'aurelia-framework';
+import {inject, computedFrom} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {Key} from '../utility/input';
 import {RemoteLeaderboardStorage} from '../storage/remoteLeaderboardStorage';
@@ -10,16 +10,18 @@ import {GameStateChangedEvent} from '../events';
 // TODO: determine storage availability at DI container setup stage?
 @inject(EventAggregator, RemoteLeaderboardStorage, LocalLeaderboardStorage)
 export class Leaderboard {
-  categories = [ GameSettings.expert(), GameSettings.intermediate(), GameSettings.beginner() ];
+  visibleCategories = [ GameSettings.expert(), GameSettings.intermediate(), GameSettings.beginner() ];
   categoriesMap = {};
   leaderboard = { all: {} };
   activeSubmission = null;
 
   constructor(eventAggregator, remoteLeaderboardStorage, localLeaderboardStorage) {
-    for (let category of this.categories) {
+    for (let category of this.visibleCategories) {
       this.leaderboard.all[category.difficulty] = [];
       this.categoriesMap[category.difficulty] = category;
     }
+    let customCategory = GameSettings.custom();
+    this.categoriesMap[customCategory.difficulty] = customCategory;
 
     // Check if remote storage is available.
     remoteLeaderboardStorage.isAvailable().then(
@@ -37,9 +39,10 @@ export class Leaderboard {
     eventAggregator.subscribe(GameStateChangedEvent, this._gameStateChanged.bind(this));
   }
 
+  @computedFrom('activeSubmission')
   get submissionText() {
     if (this.activeSubmission)
-      return `I just beat #aurelia-minesweeper in ${this.activeSubmission.time} seconds on ${this.categoriesMap[this.activeSubmission.difficulty].name} mode!`;
+      return `I beat #aurelia-minesweeper in ${this.activeSubmission.time} seconds on ${this.categoriesMap[this.activeSubmission.difficulty].name} mode!`;
   }
 
   getScores() {

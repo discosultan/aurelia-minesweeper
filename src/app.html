@@ -1,20 +1,17 @@
 <template>
-  <!-- <require from="./foundation.css"></require> -->
   <require from="./app.css"></require>
   <require from="./utility/slide"></require>
   <require from="./component/settings"></require>
   <require from="./component/gameboard"></require>
   <require from="./component/leaderboard"></require>
+  <require from="./component/social/github-button"></require>
 
   <!-- Brand and settings button -->
   <header class="section__header">
     <div class="row">
       <div class="small-10 columns align-middle">
         <img class="brand" src="img/logo.png" alt="#aurelia-minesweeper">
-        <div class="github-badge hide-for-small-only">
-          <iframe src="https://ghbtns.com/github-btn.html?user=discosultan&repo=aurelia-minesweeper&type=star&count=none"
-                  frameborder="0" scrolling="0" width="50px" height="24px"></iframe>
-        </div>
+        <github-button class="github-button hide-for-small-only" user="discosultan" repo="aurelia-minesweeper" type="star" width="50px" height="24px">
       </div>
       <div class="small-2 columns align-middle">
         <a href="javascript:void(0)" click.delegate="settingsOpen = !settingsOpen">
@@ -24,8 +21,8 @@
     </div>
   </header>
 
-  <!-- Minesweeper settings show.bind="settingsOpen" -->
-  <section  slide.bind="settingsOpen" class="section__settings">
+  <!-- Minesweeper settings -->
+  <section slide.bind="settingsOpen" class="section__settings">
     <settings settings.two-way="settings" keydown.delegate="onSettingsKeydown($event)">
   </section>
 
