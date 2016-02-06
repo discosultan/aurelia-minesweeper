@@ -1,0 +1,35 @@
+/* Base elements */
+
+body {
+  background-color: #F7F7F7;
+  color: #777777;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #444444;
+}
+
+/* Utilities */
+
+.no-padding { padding: 0; }
+
+.no-wrap { white-space: nowrap; }
+.weight-normal { font-weight: normal; }
+.text-right { text-align: right; }
+
+.inline-block { display: inline-block; }
+.inline { display: inline; }
+
+.clear-left { clear: left; }
+
+.center {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -o-transform:translate(-50%, -50%);
+  -ms-transform:translate(-50%, -50%);
+}
