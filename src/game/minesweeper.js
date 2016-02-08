@@ -4,7 +4,7 @@ import {Timer} from '../utility/timer';
 export class Minesweeper {
   constructor (settings) {
     if (!settings.isValid())
-      throw `Minefield width and height must be larger than zero and number of mines must be less than ${settings.width*settings.height}!`;    
+      throw `Minefield width and height must be larger than zero and number of mines must be less than ${settings.width*settings.height}!`;
 
     this._timer = new Timer(() => this.time++, 1000); // TODO: extract Timer dependency?
     this.settings = settings.clone();
@@ -30,7 +30,9 @@ export class Minesweeper {
     if (isChording) {
       let adjacentMines = square.numAdjacentMines;
       let adjacentSquaresFlagged = 0;
-      this._performOnAdjacentSquares(square, adjacentSquare => { if (adjacentSquare.state === SquareState.Flagged) adjacentSquaresFlagged++; });
+      this._performOnAdjacentSquares(square, adjacentSquare => {
+        if (adjacentSquare.state === SquareState.Flagged) adjacentSquaresFlagged++;
+      });
       if (square.state === SquareState.Open && adjacentSquaresFlagged > 0 && adjacentMines === adjacentSquaresFlagged)
         this._performOnAdjacentSquares(square, adjacentSquare => this._openSquareInner(adjacentSquare));
       else
@@ -54,7 +56,8 @@ export class Minesweeper {
       this.time = 0;
       this._initializeSquares();
       this._setState(GameState.ReadyToPlay);
-      // Mines are placed when the user has opened the first square to ensure that first square is always mine-free.
+      // Mines are placed when the user has opened the first square to
+      // ensure that first square is always mine-free.
   }
 
   _initializeSquares() {
@@ -79,11 +82,11 @@ export class Minesweeper {
   }
 
   // Mines are distributed using a very naive approach where remaining mines are
-  // randomly attempted to be placed until all of them are in place.
-  // Much better alternatives would be using Fisher-Yates (Knuth) shuffle or
+  // randomly attempted to be put on squares until all of them are in place.
+  // An alternative would be using Fisher-Yates (Knuth) shuffle or
   // random traversal of the squares using a Prime Search approach.
-  // Since DOM rendering of big game boards is slow and inefficient, we wouldn't
-  // win much in applying one of the more complex apporaches.
+  // Since DOM rendering of big game boards is slow and inefficient anyway, we
+  // wouldn't win much in applying one of the more complex approaches.
   _randomlyDistributeMines(mineFreeSquare) {
     // Place mines and count nearby mines.
     for (let i = 0; i < this.settings.numMines; i++) {
