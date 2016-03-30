@@ -7,9 +7,9 @@ import {NewGameRequestedEvent} from './events';
 @inject(EventAggregator)
 export class App {
   settingsOpen = false;
-  settings = GameSettings.beginner();
+  settings = GameSettings.intermediate();
 
-  constructor(eventAggregator) {    
+  constructor(eventAggregator) {
     eventAggregator.subscribe(NewGameRequestedEvent, evt => {
       if (evt.settings.isValid())
         this.settingsOpen = false;
