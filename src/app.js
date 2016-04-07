@@ -7,7 +7,10 @@ import {NewGameRequestedEvent} from './events';
 @inject(EventAggregator)
 export class App {
   settingsOpen = false;
-  settings = GameSettings.intermediate();
+
+  settings = window.innerWidth <= 360
+    ? GameSettings.beginner()
+    : GameSettings.intermediate();
 
   constructor(eventAggregator) {
     eventAggregator.subscribe(NewGameRequestedEvent, evt => {

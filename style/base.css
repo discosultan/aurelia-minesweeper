@@ -1,6 +1,6 @@
 /* Base elements */
 
-body {
+body {  
   background-color: #F7F7F7;
   color: #777777;
 }
@@ -21,6 +21,8 @@ h1, h2, h3, h4, h5, h6 {
 .inline { display: inline; }
 
 .clear-left { clear: left; }
+
+.text-left { text-align: left; }
 
 .center {
   text-align: center;
