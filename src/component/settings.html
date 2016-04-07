@@ -22,17 +22,17 @@
     <div class="small-2 medium-3 columns">
       <span if.bind="entry.difficulty !== GameDifficulty.Custom">${entry.width}</span>
       <input if.bind="entry.difficulty === GameDifficulty.Custom" value.bind="entry.width" disabled.bind="settings !== entry"
-             class="settings__input" type="number" min="1" max="100" step="1"/ />
+             class="settings__input" type="number" min="1" max="100" step="1" />
     </div>
     <div class="small-2 medium-3 columns">
       <span if.bind="entry.difficulty !== GameDifficulty.Custom">${entry.height}</span>
       <input if.bind="entry.difficulty === GameDifficulty.Custom" value.bind="entry.height" disabled.bind="settings !== entry"
-             class="settings__input" type="number" min="1" max="100" step="1"/ />
+             class="settings__input" type="number" min="1" max="100" step="1" />
     </div>
     <div class="small-2 medium-3 columns">
       <span if.bind="entry.difficulty !== GameDifficulty.Custom">${entry.numMines}</span>
       <input if.bind="entry.difficulty === GameDifficulty.Custom" value.bind="entry.numMines" disabled.bind="settings !== entry"
-             class="settings__input" type="number" min="0" max="9999" step="1"/ />
+             class="settings__input" type="number" min="0" max="9999" step="1" />
     </div>
   </div>
   <div class="row">
