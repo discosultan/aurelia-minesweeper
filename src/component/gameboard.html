@@ -29,6 +29,9 @@
     <div repeat.for="row of minesweeper.squares" class="no-wrap">
       <div repeat.for="square of row"
            class="square no-wrap color-${square.numAdjacentMines} ${(square.state === SquareState.Open || square.state === SquareState.Pressed) ? 'square--open' : 'square--closed'} ${square.causedGameOver ? 'game-over' : ''}"
+           touchstart.delegate="onSquareTouchStart(square, $event)"
+           touchend.delegate="onSquareTouchEnd(square, $event)"
+           touchcancel.delegate="onSquareTouchCancel(square, $event)"           
            mousedown.delegate="onSquareMouseDown(square, $event)"
            mouseup.delegate="onSquareMouseUp(square, $event)"
            mouseover.delegate="onSquareMouseOver(square, $event)"
