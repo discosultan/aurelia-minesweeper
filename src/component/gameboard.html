@@ -4,7 +4,7 @@
   <!-- Labels and smiley -->
   <div class="row board__header">
     <div class="small-4 columns label no-padding no-wrap">
-      <img class="label__icon" src="img/mine.png" alt="mines">
+      <img class="label__icon" src="/img/mine.png" alt="mines">
       ${minesweeper.settings.numMines - minesweeper.numFlagged}
     </div>
     <div class="columns">
@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="small-4 columns label no-padding no-wrap">
-      <img class="label__icon" src="img/timer.png" alt="timer">
+      <img class="label__icon" src="/img/timer.png" alt="timer">
       ${minesweeper.time}
     </div>
   </div>
@@ -34,8 +34,8 @@
            mouseover.delegate="onSquareMouseOver(square, $event)"
            mouseout.delegate="onSquareMouseOut(square, $event)"
            contextmenu.delegate="onSquareContextMenu(square, $event)">
-        <img class="square__image" if.bind="square.state === SquareState.Open && square.numAdjacentMines < 0" src="img/mine.png" alt="mine">
-        <img class="square__image" if.bind="square.state === SquareState.Flagged" src="img/flag.png" alt="flag">
+        <img class="square__image" if.bind="square.state === SquareState.Open && square.numAdjacentMines < 0" src="/img/mine.png" alt="mine">
+        <img class="square__image" if.bind="square.state === SquareState.Flagged" src="/img/flag.png" alt="flag">
         <span if.bind="square.state === SquareState.Open && square.numAdjacentMines > 0">${square.numAdjacentMines}</span>
       </div>
     </div>
