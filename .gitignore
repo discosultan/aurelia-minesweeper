@@ -1,11 +1,11 @@
+.idea
+.DS_STORE
 node_modules
 jspm_packages
 bower_components
-.idea
-.DS_STORE
-/build
-/dist
-/export
+build
+dist
+export
 build/reports
 coverage
 test/e2e/dist
