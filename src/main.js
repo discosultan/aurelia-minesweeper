@@ -1,16 +1,15 @@
-var Promise = require('bluebird'); // Promise polyfill for IE11
-
-import { bootstrap } from 'aurelia-bootstrapper-webpack';
-
 import '../style/foundation.css';
-import '../style/base.css';
+import '../style/style.css';
 
-bootstrap(aurelia => {
-  aurelia.use
-    .defaultBindingLanguage()
-    .defaultResources()
-    .eventAggregator()
+import * as Bluebird from 'bluebird';
+Bluebird.config({ warnings: false });
+
+export async function configure(aurelia) {
+  aurelia.use    
+    .standardConfiguration()
+    // .developmentLogging()
     .plugin('aurelia-animator-css');
 
-  aurelia.start().then(() => aurelia.setRoot('app', document.body));
-});
+  await aurelia.start();
+  aurelia.setRoot('app');
+}

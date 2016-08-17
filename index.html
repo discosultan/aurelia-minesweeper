@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Aurelia Minesweeper</title>    
-    <link rel="shortcut icon" href="/favicon.ico">
+    <title><%- webpackConfig.metadata.title %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="<%- webpackConfig.metadata.baseUrl %>">
+    <!-- imported CSS are concatenated and added automatically -->
   </head>
-  <body>
-    <script src="bundle.js"></script>
+  <body aurelia-app="main">    
+    <% if (webpackConfig.metadata.ENV === 'development') { %>
+    <!-- Webpack Dev Server reload -->
+    <script src="/webpack-dev-server.js"></script>
+    <% } %>
   </body>
 </html>
