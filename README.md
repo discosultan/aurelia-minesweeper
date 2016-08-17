@@ -23,11 +23,6 @@ This command starts the webpack development server that serves the build bundles
 You can now browse the app at http://localhost:9000. Changes in the code
 will automatically build and reload the app.
 
-## Feature configuration
-
-Most of the configuration will happen in the `webpack.config.js` file.
-There, you may configure advanced loader features or add direct SASS or LESS loading support.
-
 ## Bundling
 
 To build a development bundle (output to /dist) execute:
