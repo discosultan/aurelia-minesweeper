@@ -1,7 +1,8 @@
 node_modules
 .DS_STORE
 npm-debug.log*
-/dist
+# Commented out for gh-pages.
+# /dist
 /build
 /typings
 /.awcache
