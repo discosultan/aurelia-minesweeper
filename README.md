@@ -1,5 +1,7 @@
 # aurelia-minesweeper
 
+![Screenshot](screenshot.jpg)
+
 ## Getting started
 
 Before you start, make sure you have a recent version of [NodeJS](http://nodejs.org/) environment *>=4.0* with NPM 3.
