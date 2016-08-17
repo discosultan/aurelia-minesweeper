@@ -13,7 +13,7 @@ let config;
 
 // basic configuration:
 const title = 'aurelia-minesweeper';
-const baseUrl = '/';
+const baseUrl = '/aurelia-minesweeper';
 const rootDir = path.resolve();
 const srcDir = path.resolve('src');
 const outDir = path.resolve('dist');
