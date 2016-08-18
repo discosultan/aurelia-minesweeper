@@ -1,5 +1,7 @@
 # aurelia-minesweeper
 
+Full implementation of [Minesweeper](https://en.wikipedia.org/wiki/Minesweeper_(video_game)) using the [Aurelia framework](http://aurelia.io/).
+
 ![Screenshot](screenshot.jpg)
 
 ## Getting started
