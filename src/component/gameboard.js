@@ -64,9 +64,9 @@ export class Gameboard {
 
   onSquareMouseUp(square, evt) {
     if (this.isMouseLeftDown && (evt.which === MouseButton.Left || evt.which === MouseButton.Right)) {
-      let previousState = this.minesweeper.state;
+      const previousState = this.minesweeper.state;
       this.minesweeper.openSquare(square, this._isChording());
-      let currentState = this.minesweeper.state;
+      const currentState = this.minesweeper.state;
       if (previousState !== currentState)
         this._eventAggregator.publish(new GameStateChangedEvent(this.minesweeper, previousState, currentState));
       this.isPressValid = false;

@@ -20,10 +20,10 @@ export class Tweet {
   onClick(evt) {
     if (evt.which == MouseButton.Left) {
       // https://dev.twitter.com/docs/intents
-			let width = 550, height = 420;
-			let winWidth = window.screen.width, winHeight = window.screen.height;
-			let left = Math.round((winWidth / 2) - (width / 2));
-      let top = winHeight > height ? Math.round((winHeight / 2) - (height / 2)) : 0;
+			const width = 550, height = 420;
+			const winWidth = window.screen.width, winHeight = window.screen.height;
+			const left = Math.round((winWidth / 2) - (width / 2));
+      const top = winHeight > height ? Math.round((winHeight / 2) - (height / 2)) : 0;
 
 			window.open(this.link.href, 'share', `scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=${width},height=${height},left=${left},top=${top}`);
 			evt.preventDefault();      

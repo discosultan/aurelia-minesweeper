@@ -2,7 +2,7 @@ export class LocalLeaderboardStorage {
   _key = 'leaderboard_v1';
 
   constructor() {
-      this._storage = window.localStorage; // TODO: extract dependency from window object.
+    this._storage = window.localStorage;
   }
 
   isAvailable() {
@@ -17,7 +17,7 @@ export class LocalLeaderboardStorage {
   get() {
     return new Promise((resolve, reject) => {
       if (this._storage) {
-        let leaderboard = this._getBlob();
+        const leaderboard = this._getBlob();
         resolve(leaderboard);
       } else {
         reject();

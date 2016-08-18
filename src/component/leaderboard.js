@@ -7,7 +7,6 @@ import {GameState} from '../game/minesweeper';
 import {GameSettings, GameDifficulty} from '../game/settings';
 import {GameStateChangedEvent} from '../events';
 
-// TODO: determine storage availability at DI container setup stage?
 @inject(EventAggregator, RemoteLeaderboardStorage, LocalLeaderboardStorage)
 export class Leaderboard {
   visibleCategories = [ GameSettings.expert(), GameSettings.intermediate(), GameSettings.beginner() ];
@@ -16,11 +15,11 @@ export class Leaderboard {
   activeSubmission = null;
 
   constructor(eventAggregator, remoteLeaderboardStorage, localLeaderboardStorage) {
-    for (let category of this.visibleCategories) {
+    for (const category of this.visibleCategories) {
       this.leaderboard.all[category.difficulty] = [];
       this.categoriesMap[category.difficulty] = category;
     }
-    let customCategory = GameSettings.custom();
+    const customCategory = GameSettings.custom();
     this.categoriesMap[customCategory.difficulty] = customCategory;
 
     // Check if remote storage is available.
@@ -48,7 +47,7 @@ export class Leaderboard {
   getScores() {
     this._storage.get().then(leaderboard => {
       if (leaderboard)
-        for (var key in leaderboard.all)
+        for (const key in leaderboard.all)
           this.leaderboard.all[key] = leaderboard.all[key];
     });
   }

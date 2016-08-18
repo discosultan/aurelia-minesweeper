@@ -12,8 +12,8 @@ export class SlideCustomAttribute {
   }
 
   valueChanged(newValue, oldValue) {
-    let method = newValue
-      ? () => this._animator.addClass(this._element, this._class) 
+    const method = newValue
+      ? () => this._animator.addClass(this._element, this._class)
       : () => this._animator.removeClass(this._element, this._class);
 
     if (this._inProgress) { // Queue animation.

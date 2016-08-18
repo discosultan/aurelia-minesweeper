@@ -6,7 +6,7 @@ export class Minesweeper {
     if (!settings.isValid())
       throw `Minefield width and height must be larger than zero and number of mines must be less than ${settings.width*settings.height}!`;
 
-    this._timer = new Timer(() => this.time++, 1000); // TODO: extract Timer dependency?
+    this._timer = new Timer(() => this.time++, 1000);
     this.settings = settings.clone();
 
     this.reset();
@@ -28,7 +28,7 @@ export class Minesweeper {
   openSquare(square, isChording) {
     if (this.state & GameState.GameOver) return;
     if (isChording) {
-      let adjacentMines = square.numAdjacentMines;
+      const adjacentMines = square.numAdjacentMines;
       let adjacentSquaresFlagged = 0;
       this._performOnAdjacentSquares(square, adjacentSquare => {
         if (adjacentSquare.state === SquareState.Flagged) adjacentSquaresFlagged++;
@@ -93,16 +93,16 @@ export class Minesweeper {
       // Get random x and y to place the mine.
       let availableSquare;
       do {
-        let random_x = Math.floor(Math.random() * this.settings.width);
-        let random_y = Math.floor(Math.random() * this.settings.height);
-        let square = this.squares[random_y][random_x];
+        const random_x = Math.floor(Math.random() * this.settings.width);
+        const random_y = Math.floor(Math.random() * this.settings.height);
+        const square = this.squares[random_y][random_x];
         if (!square.hasMine && square !== mineFreeSquare) {
           let isAdjacentToMineFreeSquare = false;
           this._performOnAdjacentSquares(mineFreeSquare, adjacentSquare => {
             if (square === adjacentSquare)
               isAdjacentToMineFreeSquare = true;
           });
-          let numSquares = this.settings.width * this.settings.height;
+          const numSquares = this.settings.width * this.settings.height;
           if (!isAdjacentToMineFreeSquare || this.settings.numMines > numSquares - 9)
             availableSquare = square;
         }
