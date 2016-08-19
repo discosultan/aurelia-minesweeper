@@ -10,7 +10,7 @@ export class Tweet {
   constructor(bindingEngine, taskQueue) {
     this._bindingEngine = bindingEngine;
     this._taskQueue = taskQueue;
-    this.url = window.location.protocol + '//' + window.location.host; // TODO: Remove dependency to window?
+    this.url = window.location.href;
   }
 
   get shareLink() {
